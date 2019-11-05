@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BooksModel;
+use App\Models\RentalModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -10,20 +12,20 @@ class RentalController extends Controller
 {
     //
     public function rent(Request $request){
-        $bookId = $request->bookId;
-        $userId = Auth::user()->id;
-        DB::table('rental')
-            ->insert([
-                'user_id'=>$userId,
-                'book_id'=>$bookId,
-                'created_at' => now(),
-                'updated_at' => now()
-            ]);
-        DB::table('books')
-            ->where('id','=',$bookId)
-            ->update([
-                'rental_flag'=>1,
-            ]);
+
+        $rentalModel = new RentalModel();
+        $booksModel = new BooksModel();
+
+        $rentalModel->rental(Auth::user()->id,$request->bookId,$request->returnDate);
+        $booksModel->bookStateUpdate($request->bookId,1);
+
         return redirect('/');
+    }
+
+    public function rentConfirm(Request $request){
+
+        $bookId = $request->bookId;
+
+        return view('rental_confirm',['bookId'=>$bookId]);
     }
 }

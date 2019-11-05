@@ -20,3 +20,5 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::post('/rental/rent', 'RentalController@rent')->name('rental');
+
+Route::post('/rental/rentConfirm', 'RentalController@rentConfirm')->name('rental');

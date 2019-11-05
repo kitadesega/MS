@@ -27,7 +27,7 @@
                                     @if($book->rental_flag)
                                         <a href="#" class="btn btn-danger">レンタル中</a>
                                     @else
-                                        <form action="/rental/rent" method="post">
+                                        <form action="/rental/rentConfirm" method="post">
                                             @csrf
                                             <input type="hidden" name="bookId" value="{{$book->id}}">
                                             <button type="submit" class="btn btn-primary">レンタル</button>
