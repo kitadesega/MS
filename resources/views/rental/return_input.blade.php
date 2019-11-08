@@ -66,7 +66,7 @@ console.log(toHalfWidth($('#bookBarcode').val()));
                         '<div class="card-body">' +
                         '<h5 class="card-title">' + data.title + '</h5>' +
                         '<p class="card-text"style="height: 200px;overflow: hidden; ">' + data.detail + '</p>' +
-                        '<form action="/rental/bookReturn" method="post">@csrf' +
+                        '<form action="/rental/returnBook" method="post">@csrf' +
                         '<input type="hidden" name="bookId" value="' + data.id + '">' +
                         '<button type="submit" class="btn btn-primary">返却</button>'+
                         '</form>' +

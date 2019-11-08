@@ -7,6 +7,13 @@ use Illuminate\Support\Facades\DB;
 
 class BooksModel extends Model
 {
+    //全ての本のデータ取得
+    public function getBooks(){
+        return DB::table('books')
+            ->get();
+    }
+
+    //貸出状態、貸出状態解除
     public function bookStateUpdate($bookId,$rentalFlag){
         DB::table('books')
             ->where('id','=',$bookId)
@@ -15,14 +22,13 @@ class BooksModel extends Model
             ]);
     }
 
+    //バーコードから本を検索
     public function bookSearch($book_barcode){
         $book = DB::table('books')
             ->where('book_barcode','=',$book_barcode)
             ->first();
 
         return $book;
-
-
 
     }
 }

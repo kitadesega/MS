@@ -29,11 +29,12 @@ class HomeController extends Controller
         $booksModel = new BooksModel();
         $rentalModel = new RentalModel();
 
-        $books = DB::table('books')
-            ->get();
+        $books = $booksModel->getBooks();
 
+        //貸出状態が1(貸出中)であれば返却日を入れる
         foreach ($books as $book){
-            if($book->rental_flag == 1) {
+            $book->returnDay = '';
+            if($book->rental_flag === 1) {
                 $book->returnDay = $rentalModel->returnDay($book->id);
             }
         }

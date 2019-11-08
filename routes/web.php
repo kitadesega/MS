@@ -19,6 +19,13 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::post('/rental/rent', 'RentalController@rent')->name('rental');
+Route::prefix('rental')->group(function () {
+    Route::get('rentBookInput', 'RentalController@rentBookInput')->name('rental');
+    Route::post('rentConfirm', 'RentalController@rentConfirm')->name('rental');
+    Route::post('rent', 'RentalController@rent')->name('rental');
 
-Route::post('/rental/rentConfirm', 'RentalController@rentConfirm')->name('rental');
+    Route::get('returnBookInput', 'RentalController@returnBookInput')->name('rental');
+    Route::post('returnBook', 'RentalController@returnBook')->name('rental');
+});
+//バーコード本検索
+Route::post('/ajaxBookSearch', 'RentalController@ajaxBookSearch');

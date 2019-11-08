@@ -26,10 +26,10 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     トップ
                 </a>
-                <a class="navbar-brand" href="/rental/select">
+                <a class="navbar-brand" href="/rental/rentBookInput">
                     レンタル
                 </a>
-                <a class="navbar-brand" href="/rental/bookReturnInput">
+                <a class="navbar-brand" href="/rental/returnBookInput">
                     返却
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
