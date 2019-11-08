@@ -18,4 +18,18 @@ class RentalModel extends Model
                 'updated_at' => now()
             ]);
     }
+
+    public function returnDay($bookId){
+        return DB::table('rental')
+            ->where('book_id','=',$bookId)
+            ->value('return_date');
+    }
+
+    public function bookReturn($userId,$bookId){
+        return DB::table('rental')
+            ->where('user_id','=',$userId)
+            ->where('book_id','=',$bookId)
+            ->delete();
+
+    }
 }

@@ -14,4 +14,15 @@ class BooksModel extends Model
                 'rental_flag' => $rentalFlag,
             ]);
     }
+
+    public function bookSearch($book_barcode){
+        $book = DB::table('books')
+            ->where('book_barcode','=',$book_barcode)
+            ->first();
+
+        return $book;
+
+
+
+    }
 }
