@@ -18,6 +18,7 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/barcodeLogin', 'LoginController@barcodeLogin')->name('login');
 
 Route::prefix('rental')->group(function () {
     Route::get('rentBookInput', 'RentalController@rentBookInput')->name('rental');

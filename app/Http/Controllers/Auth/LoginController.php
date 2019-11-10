@@ -36,4 +36,18 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function barcodeLogin(){
+        return view('auth.barcode_login');
+    }
+
+//$user = \App\User::where('uuid', $request->uuid)->first();
+//
+//if(!is_null($user)) {
+//
+//\Auth::login($user);    // ユーザーをログインさせる
+//$result = true;
+//
+//}
+
 }
