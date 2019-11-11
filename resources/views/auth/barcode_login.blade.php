@@ -12,8 +12,12 @@
                             <div class="form-group">
                                 <label for="text1">バーコードをスキャンしてください</label>
                                 <div class="form-control-input">
-                                  <input type="text" id="bookBarcode" class="form-control" onblur="myFnc();" Ω>
+                                  <input type="text" id="userBarcode" class="form-control" onblur="myFnc();" Ω>
                                 </div>
+                            </div>
+
+                            <div id="login-check">
+
                             </div>
 
                     </div>
@@ -54,14 +58,14 @@
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         /* Ajax通信開始 */
 
-        $('#bookBarcode').on('change', function () {
-console.log(toHalfWidth($('#bookBarcode').val()));
+        $('#userBarcode').on('change', function () {
+// console.log(toHalfWidth($('#bookBarcode').val()));
             var request = $.ajax({
                 type: 'POST',
                 data: {
-                    bookBarcode: $('#bookBarcode').val()
+                    userBarcode: $('#userBarcode').val()
                 },
-                url: '/ajaxBookSearch',
+                url: '/ajaxBarcodeLogin',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
@@ -71,45 +75,14 @@ console.log(toHalfWidth($('#bookBarcode').val()));
             });
 
             /* 成功時 */
+            $('#userBarcode').val('');
+            $('#login-check').empty();
             request.done(function (data) {
-                console.log(data);
-                $('#book').empty();
-                $('#bookBarcode').val('');
-
-                if (Object.keys(data).length) {
-                    if(data.rental_flag == 1){
-                        $('#book').append(
-                            '<div class="col-sm-6 col-md-4">' +
-                            '<a href="#" class="card">' +
-                            '<img class="card-img" src="{{ asset('') }}image/' + data.image + '" alt="...">' +
-                            '</a>' +
-                            '<div class="card-body">' +
-                            '<h5 class="card-title">' + data.title + '</h5>' +
-                            '<p class="card-text"style="height: 200px;overflow: hidden; ">' + data.detail + '</p>' +
-                            '<h2>貸出中です</h2>' +
-                            '<a href="#" class="btn btn-danger">返却日:'+ data.returnDay +'</a>' +
-                            '</div>' +
-                            '</div>'
-                        );
-                    }else {
-                        $('#book').append(
-                            '<div class="col-sm-6 col-md-4">' +
-                            '<a href="#" class="card">' +
-                            '<img class="card-img" src="{{ asset('') }}image/' + data.image + '" alt="...">' +
-                            '</a>' +
-                            '<div class="card-body">' +
-                            '<h5 class="card-title">' + data.title + '</h5>' +
-                            '<p class="card-text"style="height: 200px;overflow: hidden; ">' + data.detail + '</p>' +
-                            '<form action="/rental/rentConfirm" method="post">@csrf' +
-                            '<input type="hidden" name="bookId" value="' + data.id + '">' +
-                            '<button type="submit" class="btn btn-primary">レンタル</button>' +
-                            '</form>' +
-                            '</div>' +
-                            '</div>'
-                        );
-                    }
+                if(data === true){
+                    $('#login-check').append('<h2>ログインに成功しました。5秒後にトップへ戻ります。</h2>');
+                    setTimeout("location.reload()",5000);
                 }else{
-                    $('#book').append('<h1>存在しません</h1>');
+                    $('#login-check').append('<h2>ログインに失敗しました。</h2>');
                 }
 
             });

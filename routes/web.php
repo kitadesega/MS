@@ -18,7 +18,9 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/barcodeLogin', 'LoginController@barcodeLogin')->name('login');
+Route::get('/barcodeLogin', 'Auth\LoginController@barcodeLogin');
+//バーコードログイン
+Route::post('/ajaxBarcodeLogin', 'Auth\LoginController@ajaxBarcodeLogin');
 
 Route::prefix('rental')->group(function () {
     Route::get('rentBookInput', 'RentalController@rentBookInput')->name('rental');
@@ -30,3 +32,5 @@ Route::prefix('rental')->group(function () {
 });
 //バーコード本検索
 Route::post('/ajaxBookSearch', 'RentalController@ajaxBookSearch');
+
+

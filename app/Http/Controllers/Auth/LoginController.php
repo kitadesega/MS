@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -39,6 +42,19 @@ class LoginController extends Controller
 
     public function barcodeLogin(){
         return view('auth.barcode_login');
+    }
+
+    public function ajaxBarcodeLogin(Request $request){
+
+        $result = false;
+
+        $user = User::where('uuid',$request->userBarcode)->first();
+        if(!is_null($user)){
+            Auth::login($user);
+            $result = true;
+        }
+
+        return response()->json($result);
     }
 
 //$user = \App\User::where('uuid', $request->uuid)->first();

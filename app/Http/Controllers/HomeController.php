@@ -36,6 +36,8 @@ class HomeController extends Controller
             $book->returnDay = '';
             if($book->rental_flag === 1) {
                 $book->returnDay = $rentalModel->returnDay($book->id);
+//                $book->startDay = DB::table('rental')->where('book_id','=',$book->id)->value('created_at');
+//                $book->startDay = date('Y年m月d日',  strtotime($book->startDay));
             }
         }
 
