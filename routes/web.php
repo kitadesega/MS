@@ -34,3 +34,35 @@ Route::prefix('rental')->group(function () {
 Route::post('/ajaxBookSearch', 'RentalController@ajaxBookSearch');
 
 
+
+//
+///*
+//|--------------------------------------------------------------------------
+//| 2) User ログイン後
+//|--------------------------------------------------------------------------
+//*/
+//Route::group(['middleware' => 'auth:user'], function() {
+//    Route::get('/home', 'HomeController@index')->name('home');
+//});
+
+/*
+|--------------------------------------------------------------------------
+| 3) Admin 認証不要
+|--------------------------------------------------------------------------
+*/
+Route::group(['prefix' => 'admin'], function() {
+    Route::get('/',         function () { return redirect('/admin/home'); });
+    Route::get('login',     'Admin\LoginController@showLoginForm')->name('admin.login');
+    Route::post('login',    'Admin\LoginController@login');
+});
+
+/*
+|--------------------------------------------------------------------------
+| 4) Admin ログイン後
+|--------------------------------------------------------------------------
+*/
+Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
+//    Route::get('login',     'Admin\HomeController@index')->name('admin.home');
+    Route::post('logout',   'Admin\LoginController@logout')->name('admin.logout');
+    Route::get('home',      'Admin\HomeController@index')->name('admin.home');
+});
