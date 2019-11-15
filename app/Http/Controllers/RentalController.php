@@ -66,6 +66,25 @@ class RentalController extends Controller
         $rentalModel->bookReturn(Auth::user()->id,$request->bookId);
         //返却するのでrentalFlagを0に
         $booksModel->bookStateUpdate($request->bookId,0);
-        return view('rental.return_complete');
+        return view('rental.return_complete',['bookId' => $request->bookId]);
     }
+
+    //レビュー機能
+    public function review(Request $request){
+
+        DB::table('review')
+            ->insert([
+                'user_id' => Auth::user()->id,
+                'Anonymous_flag' => $request->Anonymous_flag,
+                'Impressions' => $request->Impressions,
+                'rank' => $request->rank,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+
+       return redirect('/reviewComplete');
+
+
+    }
+
 }

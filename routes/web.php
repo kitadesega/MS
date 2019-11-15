@@ -33,7 +33,11 @@ Route::prefix('rental')->group(function () {
 //バーコード本検索
 Route::post('/ajaxBookSearch', 'RentalController@ajaxBookSearch');
 
-
+//レビュー機能
+Route::post('/review', 'RentalController@review');
+Route::get('/reviewComplete', function () {
+    return view('review.review_complete');
+});
 
 //
 ///*
