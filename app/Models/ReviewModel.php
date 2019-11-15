@@ -37,7 +37,16 @@ class ReviewModel extends Model
             $avr = false;
         }
 
-
         return $avr;
     }
+
+    public function getReviewCount($bookId){
+        $reviewCount = DB::table('review')
+            ->select('rank')
+            ->where('book_id','=',$bookId)
+            ->count();
+
+        return $reviewCount;
+    }
+
 }

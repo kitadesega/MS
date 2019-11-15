@@ -41,6 +41,7 @@ class HomeController extends Controller
 //                $book->startDay = date('Y年m月d日',  strtotime($book->startDay));
             }
             $book->starAvg = $reviewModel->getAvgRank($book->id);
+            $book->reviewCount = $reviewModel->getReviewCount($book->id);
         }
 
         return view('home',['books'=>$books]);
