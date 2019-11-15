@@ -32,6 +32,37 @@
         button:focus {
             outline:0;
         }
+        /*body {*/
+        /*    margin: 50px;*/
+        /*    text-align: center;*/
+        /*    font-family: 'Open Sans', sans-serif;*/
+        /*    background: #f2fbff;*/
+        /*}*/
+        h1 {
+            font-size: 24px;
+            margin-bottom: 25px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+
+        .star-ratings-sprite {
+            background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
+            font-size: 0;
+            height: 21px;
+            line-height: 0;
+            overflow: hidden;
+            text-indent: -999em;
+            width: 110px;
+            margin: 0 auto;
+        }
+        .star-ratings-sprite-rating {
+            background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
+            background-position: 0 100%;
+            float: left;
+            height: 21px;
+            display: block;
+        }
     </style>
 </head>
 <body>

@@ -35,12 +35,21 @@
                                         </form>
                                     @endif
                                 </div>
+                                @if($book->starAvg)
+                                <div class="star-ratings-sprite"><span style="width:{{ $book->starAvg }}%" class="star-ratings-sprite-rating"></span></div>
+                                @endif
                             </div>
+
                             @endforeach
+
                         </div>
                 </div>
+
             </div>
+
         </div>
     </div>
+
 </div>
 @endsection
+

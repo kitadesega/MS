@@ -40,6 +40,7 @@
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary mb-2">投稿する</button>
                             </div>
+                            <input type="hidden" name="bookId" value="{{$bookId}}">
                         </form>
                     </div>
                 </div>
