@@ -72,6 +72,9 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     トップ
                 </a>
+                <a class="navbar-brand" href="/search/index">
+                    検索
+                </a>
                 <a class="navbar-brand" href="/rental/rentBookInput">
                     レンタル
                 </a>

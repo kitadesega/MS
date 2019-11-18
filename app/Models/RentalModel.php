@@ -16,7 +16,8 @@ class RentalModel extends Model
                 'book_id' => $bookId,
                 'return_date' => $returnDate,
                 'created_at' => now(),
-                'updated_at' => now()
+                'updated_at' => now(),
+                'return_flag' => 0
             ]);
     }
 
@@ -32,7 +33,33 @@ class RentalModel extends Model
         return DB::table('rental')
             ->where('user_id','=',$userId)
             ->where('book_id','=',$bookId)
-            ->delete();
+            ->update(['return_flag' => 1]);
+    }
+
+    //レンタル履歴からおすすめの本を小ジャンルから抽出
+    public function recommendedBooks($userId){
+
+        $smallgenre_books = DB::table('rental')
+            ->select('smallgenre')
+            ->join('books','books.id','=','rental.book_id')
+            ->get();
+
+        foreach($smallgenre_books as $book){
+            $smallgenre[] = $book->smallgenre;
+        }
+
+        $smallgenre = array_unique($smallgenre);
+        $smallgenre = array_values($smallgenre);
+
+        foreach ($smallgenre as $value){
+            $tmp_books = DB::table('books')
+                ->where('smallgenre','=',$value)
+                ->get();
+
+            foreach($tmp_books as $book){
+                $books[] = $book;
+            }
+        }
 
     }
 }

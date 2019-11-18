@@ -32,7 +32,7 @@ Route::prefix('rental')->group(function () {
 });
 
 Route::prefix('search')->group(function(){
-	Route::get('test', 'SearchController@test')->name('test');
+	Route::get('index', 'SearchController@index')->name('search');
 	Route::post('allSelect', 'SearchController@allSelect')->name('select');
 	Route::post('titleSelect', 'SearchController@titleSelect')->name('select');
 	Route::post('fuzzySelect', 'SearchController@fuzzySelect')->name('select');
