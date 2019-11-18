@@ -17,6 +17,7 @@ class CreateRentalTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('book_id');
+            $table->boolean('return_flag');
             $table->timestamps();
         });
     }
