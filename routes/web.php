@@ -30,6 +30,15 @@ Route::prefix('rental')->group(function () {
     Route::get('returnBookInput', 'RentalController@returnBookInput')->name('rental');
     Route::post('returnBook', 'RentalController@returnBook')->name('rental');
 });
+
+Route::prefix('search')->group(function(){
+	Route::get('test', 'SearchController@test')->name('test');
+	Route::post('allSelect', 'SearchController@allSelect')->name('select');
+	Route::post('titleSelect', 'SearchController@titleSelect')->name('select');
+	Route::post('fuzzySelect', 'SearchController@fuzzySelect')->name('select');
+	Route::post('genreSelect', 'SearchController@genreSelect')->name('select');
+});
+
 //バーコード本検索
 Route::post('/ajaxBookSearch', 'RentalController@ajaxBookSearch');
 
