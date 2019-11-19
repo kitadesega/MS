@@ -32,7 +32,7 @@ class HomeController extends Controller
         $rentalModel = new RentalModel();
         $reviewModel = new ReviewModel();
         $books = $booksModel->getBooks();
-        $RecommendedBooks = $rentalModel->recommendedBooks(Auth::user()->id);
+
         //貸出状態が1(貸出中)であれば返却日を入れる
         foreach ($books as $book){
             $book->returnDay = '';
@@ -42,6 +42,8 @@ class HomeController extends Controller
             $book->starAvg = $reviewModel->getAvgRank($book->id);
             $book->reviewCount = $reviewModel->getReviewCount($book->id);
         }
+        //貸出履歴からお勧めを表示
+        $rentalRecommendedBooks = $rentalModel->recommendedBooks(Auth::user()->id);
 
         return view('home',['books'=>$books]);
     }

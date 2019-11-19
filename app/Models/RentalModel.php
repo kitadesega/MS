@@ -48,18 +48,30 @@ class RentalModel extends Model
             $smallgenre[] = $book->smallgenre;
         }
 
-        $smallgenre = array_unique($smallgenre);
-        $smallgenre = array_values($smallgenre);
+        //重複したカテゴリーを削除し,キーを振り直し
+        $smallgenre = array_values(array_unique($smallgenre));
 
-        foreach ($smallgenre as $value){
+        foreach ($smallgenre as $value) {
             $tmp_books = DB::table('books')
-                ->where('smallgenre','=',$value)
+                ->where('smallgenre', '=', $value)
                 ->get();
 
-            foreach($tmp_books as $book){
+            foreach ($tmp_books as $book) {
                 $books[] = $book;
             }
         }
+
+        //５冊ランダムに選出
+        for($i=0; $i<5; $i++){
+            if(!empty($books)) {
+                $tmpNumber = array_rand($books);
+                $randBooks[] = $books[$tmpNumber];
+                array_splice($books, $tmpNumber, 1);
+            }
+        }
+
+        return $randBooks;
+
 
     }
 }
