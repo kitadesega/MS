@@ -43,7 +43,7 @@ class HomeController extends Controller
             $book->reviewCount = $reviewModel->getReviewCount($book->id);
         }
         //貸出履歴からお勧めを表示
-        $rentalRecommendedBooks = $rentalModel->recommendedBooks(Auth::user()->id);
+        $rentalRecommendedBooks = $booksModel->rentalRecommendedBooks(Auth::user()->id);
 
         return view('home',['books'=>$books]);
     }
