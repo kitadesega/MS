@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">全本</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -22,7 +22,7 @@
                             </a>
                             <div class="card-body">
                                 <h5 class="card-title">{{$book->title}}</h5>
-                                <p class="card-text"style="height: 200px;overflow: hidden; ">{{$book->detail}}</p>
+{{--                                <p class="card-text"style="height: 100px;overflow: hidden; ">{{$book->detail}}</p>--}}
                                 @if($book->rental_flag)
                                     {{--  貸出美:{{$book->startDay}}--}}
                                     <a href="#" class="btn btn-danger">返却日:{{$book->returnDay}}</a>
@@ -43,6 +43,10 @@
                             @endif
                         </div>
                         @endforeach
+
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        {{ $books->links() }}
                     </div>
                 </div>
             </div>

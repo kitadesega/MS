@@ -10,7 +10,7 @@ class BooksModel extends Model
     //全ての本のデータ取得
     public function getBooks(){
         return DB::table('books')
-            ->get();
+            ->paginate(6);
     }
 
     //貸出状態、貸出状態解除
