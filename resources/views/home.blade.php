@@ -22,7 +22,7 @@
                             </a>
                             <div class="card-body">
                                 <h5 class="card-title">{{$book->title}}</h5>
-{{--                                <p class="card-text"style="height: 100px;overflow: hidden; ">{{$book->detail}}</p>--}}
+                                {{--   <p class="card-text"style="height: 100px;overflow: hidden; ">{{$book->detail}}</p>--}}
                                 @if($book->rental_flag)
                                     {{--  貸出美:{{$book->startDay}}--}}
                                     <a href="#" class="btn btn-danger">返却日:{{$book->returnDay}}</a>

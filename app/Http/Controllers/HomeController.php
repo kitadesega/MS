@@ -45,6 +45,9 @@ class HomeController extends Controller
         //貸出履歴からお勧めを表示
         $rentalRecommendedBooks = $booksModel->rentalRecommendedBooks(Auth::user()->id);
 
-        return view('home',['books'=>$books]);
+        $reviewRecommendedBooks = $booksModel->reviewRecommendedBooks(Auth::user()->id);
+
+//        dd($reviewRecommendedBooks);
+        return view('home',['books'=>$books,'reviewRecommendedBooks' => $reviewRecommendedBooks]);
     }
 }
