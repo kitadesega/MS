@@ -63,6 +63,22 @@
             height: 21px;
             display: block;
         }
+
+        .box-read{
+            overflow:hidden;
+            text-overflow: ellipsis;
+            white-space:nowrap;
+        }
+
+        a {
+            text-decoration: none;
+            color : inherit;
+        }
+
+        a:hover {
+            text-decoration: none;
+            color : inherit;
+        }
     </style>
 </head>
 <body>

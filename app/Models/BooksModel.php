@@ -13,6 +13,12 @@ class BooksModel extends Model
             ->paginate(6);
     }
 
+    public function getBooksFirst($bookId){
+        return DB::table('books')
+            ->where('id','=',$bookId)
+            ->first();
+    }
+
     //貸出状態、貸出状態解除
     public function bookStateUpdate($bookId,$rentalFlag){
         DB::table('books')
@@ -47,7 +53,7 @@ class BooksModel extends Model
         //重複したカテゴリーを削除し,キーを振り直し
         $smallgenre = array_values(array_unique($smallgenre));
 
-        $books[] = null;
+        $books = array();
         foreach ($smallgenre as $value) {
             $tmp_books = DB::table('books')
                 ->where('smallgenre', '=', $value)
@@ -58,13 +64,12 @@ class BooksModel extends Model
             }
         }
 
-
         //５冊ランダムに選出
         for($i=0; $i<5; $i++){
             if(!empty($books)) {
                 $tmpNumber = array_rand($books);
                 $randBooks[] = $books[$tmpNumber];
-                array_splice($books, $tmpNumber, 1);
+                unset($books[$tmpNumber]);
             }
         }
 
@@ -76,7 +81,7 @@ class BooksModel extends Model
 
         $avgRanksAndSmallgenres = $this->getAvgRankAndSmallgenres($userId);
 
-        // foreachで1つずつ値を取り出す
+        // foreachで1つずつ値を取り出す。カテゴリをキーに中に平均ランクを。
         foreach ($avgRanksAndSmallgenres as $value) {
             $avgRanks[$value->smallgenre] = $value->avg_rank;
         }
@@ -84,27 +89,35 @@ class BooksModel extends Model
         //平均評価が高い順にソート
         arsort($avgRanks);
 
-        //評価の高いトップ３のカテゴリーを取得し配列へ
+        //評価の高いトップ３のカテゴリー(キー)を取得し配列へ
         for($i=0;$i<=2;$i++){
             $smallgenres[] = key((array_slice($avgRanks, $i, 1, true)));
         }
 
         $books = array();
 
+        //トップ3のカテゴリーの本を取得して１つの配列に
         foreach ($smallgenres as $smallgenre){
             $tmpBooks = $this->getBooksForSmallgenre($smallgenre);
             $books = array_merge_recursive($books, $tmpBooks->all());
         }
 
-        //５冊ランダムに選出
+        //本の平均評価の取得とソート用の配列の作成
+        foreach ((array) $books as $key => $book) {
+            $book->avgRank = $this->getAvgRank($book->id);
+            $sort[$key] = $book->avgRank;
+        }
+
+        //平均評価の大きい順に本を並び替え
+        array_multisort($sort, SORT_DESC, $books);
+
+        //上位5冊を取得
         for($i=0; $i<5; $i++){
             if(!empty($books)) {
-                $tmpNumber = array_rand($books);
-                $randBooks[] = $books[$tmpNumber];
-                array_splice($books, $tmpNumber, 1);
+                $ReBooks[] = $books[$i];
             }
         }
-        return $randBooks;
+        return $books;
 
 
     }
@@ -124,5 +137,24 @@ class BooksModel extends Model
         return DB::table('books')
             ->where('books.smallgenre','=',$smallgenre)
             ->get();
+    }
+
+    //本のIDから平均評価を取得
+    public function getAvgRank($bookId){
+        $ranks = DB::table('review')
+            ->select('rank')
+            ->where('book_id','=',$bookId)
+            ->get();
+
+        if(!$ranks->isEmpty()) {
+            foreach ($ranks as $rank) {
+                $array[] = $rank->rank;
+            }
+            $avg = round(array_sum($array) / count($array),2);
+        }else{
+            $avg = 0;
+        }
+
+        return $avg;
     }
 }

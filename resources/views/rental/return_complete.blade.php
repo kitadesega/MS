@@ -3,13 +3,29 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">本の返却</div>
+                    <div class="card-header">返却が完了しました</div>
 
                     <div class="card-body">
                         <div class="row">
-                            <h1>返却が完了しました</h1>
+                            <h1>貸出履歴からのあなたへのおすすめ</h1>
+                        </div>
+                        <div class="row justify-content-between m-0">
+
+                            @foreach($rentalRecommendedBooks as $book)
+                            <div class="col-2 p-0" id="column1">
+                                <div class="card w-100 shadow p-2" style="border-style: none;">
+                                    <img class="card-img-top" src="{{ asset('image/'.$book->image) }}" alt="Card image cap">
+                                    <div class="card-body p-0 title1">
+                                        <span class="badge badge-pill badge-primary my-2">{{ $book->smallgenre }}</span>
+                                        <h6 class="m-0"><div class="box-read">{{ $book->title }}</div></h6>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+
+
                         </div>
                         <form action="/review"method="post">
                             @csrf

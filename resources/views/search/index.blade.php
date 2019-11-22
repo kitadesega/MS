@@ -58,12 +58,12 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="panel-body">テスト</div>
-                        <form action="/search/allSelect" method="post" accept-charset="utf-8">
-                            {{ csrf_field() }}
-                            <button type="submit" class="btn btn-primary">全件検索</button>
-                        </form>
+{{--                        <form action="/search/allSelect" method="post" accept-charset="utf-8">--}}
+{{--                            {{ csrf_field() }}--}}
+{{--                            <button type="submit" class="btn btn-primary">全件検索</button>--}}
+{{--                        </form>--}}
 
-                        <hr />
+{{--                        <hr />--}}
 
                         <form action="/search/titleSelect" method="post" accept-charset="utf-8">
                             {{ csrf_field() }}
@@ -72,22 +72,22 @@
                             <button type="submit" class="btn btn-primary">検索</button>
                         </form>
 
-                        <hr />
+{{--                        <hr />--}}
 
-                        <form action="/search/fuzzySelect" method="post" accept-charset="utf-8">
-                            {{ csrf_field() }}
-                            <p>概要あいまい検索</p>
-                            <input type="text" name="fuzzyword" value="" placeholder="">
-                            <button type="submit" class="btn btn-primary">検索</button>
-                        </form>
+{{--                        <form action="/search/fuzzySelect" method="post" accept-charset="utf-8">--}}
+{{--                            {{ csrf_field() }}--}}
+{{--                            <p>概要あいまい検索</p>--}}
+{{--                            <input type="text" name="fuzzyword" value="" placeholder="">--}}
+{{--                            <button type="submit" class="btn btn-primary">検索</button>--}}
+{{--                        </form>--}}
 
-                        <hr />
+{{--                        <hr />--}}
 
-                        <form action="/search/genreSelect" method="post" accept-charset="utf-8">
-                            {{ csrf_field() }}
-                            <input type="text" name="fuzzyword" value="" placeholder="">
-                            <button type="submit" class="btn btn-primary">おすすめ表示(検索は概要で)</button>
-                        </form>
+{{--                        <form action="/search/genreSelect" method="post" accept-charset="utf-8">--}}
+{{--                            {{ csrf_field() }}--}}
+{{--                            <input type="text" name="fuzzyword" value="" placeholder="">--}}
+{{--                            <button type="submit" class="btn btn-primary">おすすめ表示(検索は概要で)</button>--}}
+{{--                        </form>--}}
                     </div>
 
                 </div>

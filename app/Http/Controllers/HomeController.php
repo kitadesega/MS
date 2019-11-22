@@ -44,10 +44,21 @@ class HomeController extends Controller
         }
         //貸出履歴からお勧めを表示
         $rentalRecommendedBooks = $booksModel->rentalRecommendedBooks(Auth::user()->id);
-
+        foreach ($rentalRecommendedBooks as $book){
+            $book->starAvg = $reviewModel->getAvgRank($book->id);
+            $book->reviewCount = $reviewModel->getReviewCount($book->id);
+        }
         $reviewRecommendedBooks = $booksModel->reviewRecommendedBooks(Auth::user()->id);
+        foreach ($reviewRecommendedBooks as $book){
+            $book->starAvg = $reviewModel->getAvgRank($book->id);
+            $book->reviewCount = $reviewModel->getReviewCount($book->id);
+        }
 
 //        dd($reviewRecommendedBooks);
-        return view('home',['books'=>$books,'reviewRecommendedBooks' => $reviewRecommendedBooks]);
+        return view('home',[
+            'books'=>$books,
+            'reviewRecommendedBooks' => $reviewRecommendedBooks,
+            'rentalRecommendedBooks' => $rentalRecommendedBooks
+        ]);
     }
 }
