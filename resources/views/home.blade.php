@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">全本</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,33 +14,44 @@
                         </div>
                     @endif
 
-
-                        <div class="row">
-                            @foreach($books as $book)
-                            <div class="col-sm-6 col-md-4">
-                                <a href="#" class="card">
-                                    <img class="card-img" src="{{ asset('image/'.$book->image) }}" alt="...">
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title">{{$book->title}}</h5>
-                                    <p class="card-text"style="height: 200px;overflow: hidden; ">{{$book->detail}}</p>
-                                    @if($book->rental_flag)
-{{--                                        貸出美:{{$book->startDay}}--}}
-                                        <a href="#" class="btn btn-danger">返却日:{{$book->returnDay}}</a>
-                                    @else
-                                        <form action="/rental/rentConfirm" method="post">
-                                            @csrf
-                                            <input type="hidden" name="bookId" value="{{$book->id}}">
-                                            <button type="submit" class="btn btn-primary">レンタル</button>
-                                        </form>
-                                    @endif
-                                </div>
+                    <div class="row">
+                        @foreach($books as $book)
+                        <div class="col-sm-6 col-md-4">
+                            <a href="#" class="card">
+                                <img class="card-img" src="{{ asset('image/'.$book->image) }}" alt="...">
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title">{{$book->title}}</h5>
+                                {{--   <p class="card-text"style="height: 100px;overflow: hidden; ">{{$book->detail}}</p>--}}
+                                @if($book->rental_flag)
+                                    {{--  貸出美:{{$book->startDay}}--}}
+                                    <a href="#" class="btn btn-danger">返却日:{{$book->returnDay}}</a>
+                                @else
+                                    <form action="/rental/rentConfirm" method="post">
+                                        @csrf
+                                        <input type="hidden" name="bookId" value="{{$book->id}}">
+                                        <button type="submit" class="btn btn-primary">レンタル</button>
+                                    </form>
+                                @endif
                             </div>
-                            @endforeach
+                            @if($book->starAvg)
+                            <div class="star-ratings-sprite" style="display: inline-block">
+                                <span style="width:{{ $book->starAvg }}%" class="star-ratings-sprite-rating"></span>
+                            </div>
+                                <span>({{ $book->reviewCount }})件</span>
+
+                            @endif
                         </div>
+                        @endforeach
+
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        {{ $books->links() }}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 @endsection
+

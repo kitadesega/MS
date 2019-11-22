@@ -4,12 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\BooksModel;
 use App\Models\RentalModel;
+use App\Models\ReviewModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class RentalController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     //バーコードを通して借りる本を選択
     public function rentBookInput(){
         return view('rental.rent_input');
@@ -66,6 +73,17 @@ class RentalController extends Controller
         $rentalModel->bookReturn(Auth::user()->id,$request->bookId);
         //返却するのでrentalFlagを0に
         $booksModel->bookStateUpdate($request->bookId,0);
-        return view('rental.return_complete');
+        return view('rental.return_complete',['bookId' => $request->bookId]);
     }
+
+    //レビュー機能
+    public function review(Request $request){
+
+    $reviewModel = new ReviewModel();
+
+    $reviewModel->reviewInsert(Auth::user()->id,$request->bookId,$request->Anonymous_flag,$request->Impressions,$request->rank);
+
+       return redirect('/reviewComplete');
+    }
+
 }

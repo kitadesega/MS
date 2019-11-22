@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,6 +19,51 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        button {
+            background: none;
+            border: none;
+            outline: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+
+        }
+        button:focus {
+            outline:0;
+        }
+        /*body {*/
+        /*    margin: 50px;*/
+        /*    text-align: center;*/
+        /*    font-family: 'Open Sans', sans-serif;*/
+        /*    background: #f2fbff;*/
+        /*}*/
+        h1 {
+            font-size: 24px;
+            margin-bottom: 25px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+
+        .star-ratings-sprite {
+            background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
+            font-size: 0;
+            height: 21px;
+            line-height: 0;
+            overflow: hidden;
+            text-indent: -999em;
+            width: 110px;
+            margin: 0 auto;
+        }
+        .star-ratings-sprite-rating {
+            background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
+            background-position: 0 100%;
+            float: left;
+            height: 21px;
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -25,6 +71,9 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     トップ
+                </a>
+                <a class="navbar-brand" href="/search/index">
+                    検索
                 </a>
                 <a class="navbar-brand" href="/rental/rentBookInput">
                     レンタル

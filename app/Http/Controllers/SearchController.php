@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\DB;
 class SearchController extends Controller
 {
     //
-    public function test(){
-    	return view('search.test');
+    public function index(){
+    	return view('search.index');
     }
 
     public function allSelect(Request $request){

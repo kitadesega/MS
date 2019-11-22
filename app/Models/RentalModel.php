@@ -16,7 +16,8 @@ class RentalModel extends Model
                 'book_id' => $bookId,
                 'return_date' => $returnDate,
                 'created_at' => now(),
-                'updated_at' => now()
+                'updated_at' => now(),
+                'return_flag' => 0
             ]);
     }
 
@@ -32,7 +33,7 @@ class RentalModel extends Model
         return DB::table('rental')
             ->where('user_id','=',$userId)
             ->where('book_id','=',$bookId)
-            ->delete();
-
+            ->update(['return_flag' => 1]);
     }
+
 }

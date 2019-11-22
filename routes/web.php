@@ -32,7 +32,7 @@ Route::prefix('rental')->group(function () {
 });
 
 Route::prefix('search')->group(function(){
-	Route::get('test', 'SearchController@test')->name('test');
+	Route::get('index', 'SearchController@index')->name('search');
 	Route::post('allSelect', 'SearchController@allSelect')->name('select');
 	Route::post('titleSelect', 'SearchController@titleSelect')->name('select');
 	Route::post('fuzzySelect', 'SearchController@fuzzySelect')->name('select');
@@ -42,4 +42,40 @@ Route::prefix('search')->group(function(){
 //バーコード本検索
 Route::post('/ajaxBookSearch', 'RentalController@ajaxBookSearch');
 
+//レビュー機能
+Route::post('/review', 'RentalController@review');
+Route::get('/reviewComplete', function () {
+    return view('review.review_complete');
+});
 
+//
+///*
+//|--------------------------------------------------------------------------
+//| 2) User ログイン後
+//|--------------------------------------------------------------------------
+//*/
+//Route::group(['middleware' => 'auth:user'], function() {
+//    Route::get('/home', 'HomeController@index')->name('home');
+//});
+
+/*
+|--------------------------------------------------------------------------
+| 3) Admin 認証不要
+|--------------------------------------------------------------------------
+*/
+Route::group(['prefix' => 'admin'], function() {
+    Route::get('/',         function () { return redirect('/admin/home'); });
+    Route::get('login',     'Admin\LoginController@showLoginForm')->name('admin.login');
+    Route::post('login',    'Admin\LoginController@login');
+});
+
+/*
+|--------------------------------------------------------------------------
+| 4) Admin ログイン後
+|--------------------------------------------------------------------------
+*/
+Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
+//    Route::get('login',     'Admin\HomeController@index')->name('admin.home');
+    Route::post('logout',   'Admin\LoginController@logout')->name('admin.logout');
+    Route::get('home',      'Admin\HomeController@index')->name('admin.home');
+});
