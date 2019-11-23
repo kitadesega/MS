@@ -16,6 +16,12 @@ class RentalController extends Controller
         $this->middleware('auth');
     }
 
+    public function rentalHistory(){
+        $rentalModel = new RentalModel();
+        $rentalHistory = $rentalModel->getRentalHistory(Auth::user()->id);
+
+        return view('rental.rental_history',['rentalHistory' => $rentalHistory]);
+    }
 
     //バーコードを通して借りる本を選択
     public function rentBookInput(){
@@ -73,7 +79,10 @@ class RentalController extends Controller
         $rentalModel->bookReturn(Auth::user()->id,$request->bookId);
         //返却するのでrentalFlagを0に
         $booksModel->bookStateUpdate($request->bookId,0);
-        return view('rental.return_complete',['bookId' => $request->bookId]);
+        //貸出履歴からお勧めを表示
+        $rentalRecommendedBooks = $booksModel->rentalRecommendedBooks(Auth::user()->id);
+
+        return view('rental.return_complete',['bookId' => $request->bookId,'rentalRecommendedBooks' => $rentalRecommendedBooks]);
     }
 
     //レビュー機能

@@ -29,6 +29,7 @@ Route::prefix('rental')->group(function () {
 
     Route::get('returnBookInput', 'RentalController@returnBookInput')->name('rental');
     Route::post('returnBook', 'RentalController@returnBook')->name('rental');
+    Route::get('history','RentalController@rentalHistory')->name('rental');
 });
 
 Route::prefix('search')->group(function(){
@@ -47,6 +48,12 @@ Route::post('/review', 'RentalController@review');
 Route::get('/reviewComplete', function () {
     return view('review.review_complete');
 });
+
+Route::get('/book/show/{bookid}','BookController@show');
+
+
+
+
 
 //
 ///*
