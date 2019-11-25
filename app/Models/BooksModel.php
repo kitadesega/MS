@@ -44,6 +44,7 @@ class BooksModel extends Model
         $smallgenre_books = DB::table('rental')
             ->select('smallgenre')
             ->join('books','books.id','=','rental.book_id')
+            ->where('rental.user_id','=',$userId)
             ->get();
 
         foreach($smallgenre_books as $book){
@@ -141,16 +142,18 @@ class BooksModel extends Model
 
     //本のIDから平均評価を取得
     public function getAvgRank($bookId){
-        $ranks = DB::table('review')
+        $tmpRanks = DB::table('review')
             ->select('rank')
             ->where('book_id','=',$bookId)
             ->get();
 
-        if(!$ranks->isEmpty()) {
-            foreach ($ranks as $rank) {
-                $array[] = $rank->rank;
+        if(!$tmpRanks->isEmpty()) {
+            //連想配列を配列に
+            foreach ($tmpRanks as $rank) {
+                $Ranks[] = $rank->rank;
             }
-            $avg = round(array_sum($array) / count($array),2);
+            //平均値を求める
+            $avg = round(array_sum($Ranks) / count($Ranks),2);
         }else{
             $avg = 0;
         }
