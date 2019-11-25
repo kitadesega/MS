@@ -171,11 +171,11 @@
                 <div class="side-bg"></div>
             </div>
             <div class="side">
-                <p>お知らせ</p>
+                <a href="/rental/rentBookInput"><p>レンタル</p></a>
                 <div class="side-bg"></div>
             </div>
             <div class="side">
-                <p>貸出ランキング</p>
+                <a href="/rental/returnBookInput"><p>返却</p></a>
                 <div class="side-bg"></div>
             </div>
             <div class="side">
