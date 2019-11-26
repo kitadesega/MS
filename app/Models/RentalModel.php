@@ -42,5 +42,4 @@ class RentalModel extends Model
             ->where('user_id','=',$userId)
             ->get();
     }
-
 }

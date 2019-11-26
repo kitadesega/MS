@@ -27,6 +27,28 @@
     </div>
 @endsection
 
+<!-- テキストボックス非表示にするためのstyle -->
+{{--<style>--}}
+{{--    #bookBarcode:focus{--}}
+{{--        box-shadow: none;--}}
+{{--    }--}}
+{{--    .form-control-input{--}}
+{{--        width: 100%;--}}
+{{--        position: relative;--}}
+{{--        z-index: 1;--}}
+{{--    }--}}
+{{--    .form-control-input::before{--}}
+{{--        content: "";--}}
+{{--        position: absolute;--}}
+{{--        top: 0;--}}
+{{--        left: 0;--}}
+{{--        z-index: 2;--}}
+{{--        background: #fff;--}}
+{{--        width: 100%;--}}
+{{--        height: 100%;--}}
+{{--    }--}}
+{{--</style>--}}
+
 <!-- jQuery first, then Tether, then Bootstrap JS. -->
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
