@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\BooksModel;
+use App\Models\NaturalLanguageModel;
 use App\Models\RentalModel;
 use App\Models\ReviewModel;
-use Google\Cloud\Language\LanguageClient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -63,24 +63,15 @@ class HomeController extends Controller
             $rentalRecommendedBooks = null;
             $reviewRecommendedBooks = null;
         }
-//        $config = config_path().'/json/My First Project-afd2f228a06e.json';
-//
-//
-//        putenv("GOOGLE_APPLICATION_CREDENTIALS=$config");
-//        $projectId = 'third-index-260107';
-//# Instantiates a client
-//        $language = new LanguageClient([
-//            'projectId' => $projectId
-//        ]);
-//# The text to analyze
-//        $text = '好き。大好き。とっても大好き';
-//# Detects the sentiment of the text
-//        $annotation = $language->analyzeSentiment($text);
-//
-//        $sentiment = $annotation->sentiment();
-//        dd($sentiment);
-//        echo 'Text: ' . $text . '
-//Sentiment: ' . $sentiment['score'] . ', ' . $sentiment['magnitude'];
+        $apiModel = new NaturalLanguageModel();
+        $a = $apiModel->allScoreSort();
+        dd($a);
+//        $reviews = DB::table('review')
+//            ->get();
+//        foreach($reviews as $review){
+//            $apiModel->sentimentAnalysis($review->book_id,$review->Impressions);
+//        }
+
 
         return view('home',[
             'books'=>$books,

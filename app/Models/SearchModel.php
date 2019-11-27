@@ -49,4 +49,6 @@ class SearchModel extends Model
 
     	return $genreRecomend;
     }
+
+
 }

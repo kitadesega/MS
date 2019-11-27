@@ -85,6 +85,9 @@
 {{--    <div id="app">--}}
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    HOME
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -134,7 +137,7 @@
     <div class="row">
         <aside class="col-2">
             <div class="side">
-                <a href="#">
+                <a href="/search">
                     <p>検索</p>
                 </a>
                 <div class="side-bg"></div>
