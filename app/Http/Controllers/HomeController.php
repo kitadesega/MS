@@ -65,7 +65,7 @@ class HomeController extends Controller
         }
         $apiModel = new NaturalLanguageModel();
         $a = $apiModel->allScoreSort();
-        dd($a);
+//        dd($a);
 //        $reviews = DB::table('review')
 //            ->get();
 //        foreach($reviews as $review){
