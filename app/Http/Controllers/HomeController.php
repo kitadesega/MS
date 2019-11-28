@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BooksModel;
+use App\Models\NaturalLanguageModel;
 use App\Models\RentalModel;
 use App\Models\ReviewModel;
 use Illuminate\Http\Request;
@@ -16,10 +17,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+//    public function __construct()
+//    {
+//        $this->middleware('auth');
+//    }
 
     /**
      * Show the application dashboard.
@@ -42,19 +43,36 @@ class HomeController extends Controller
             $book->starAvg = $reviewModel->getAvgRank($book->id);
             $book->reviewCount = $reviewModel->getReviewCount($book->id);
         }
-        //貸出履歴からお勧めを表示
-        $rentalRecommendedBooks = $booksModel->rentalRecommendedBooks(Auth::user()->id);
-        foreach ($rentalRecommendedBooks as $book){
-            $book->starAvg = $reviewModel->getAvgRank($book->id);
-            $book->reviewCount = $reviewModel->getReviewCount($book->id);
-        }
-        $reviewRecommendedBooks = $booksModel->reviewRecommendedBooks(Auth::user()->id);
-        foreach ($reviewRecommendedBooks as $book){
-            $book->starAvg = $reviewModel->getAvgRank($book->id);
-            $book->reviewCount = $reviewModel->getReviewCount($book->id);
-        }
 
-//        dd($reviewRecommendedBooks);
+        if(Auth::user()){
+            //貸出履歴からお勧めを取得
+            $rentalRecommendedBooks = $booksModel->rentalRecommendedBooks(Auth::user()->id);
+            //レビュー傾向からのお勧めを取得
+            $reviewRecommendedBooks = $booksModel->reviewRecommendedBooks(Auth::user()->id);
+
+            foreach ($rentalRecommendedBooks as $book){
+                $book->starAvg = $reviewModel->getAvgRank($book->id);
+                $book->reviewCount = $reviewModel->getReviewCount($book->id);
+            }
+
+            foreach ($reviewRecommendedBooks as $book){
+                $book->starAvg = $reviewModel->getAvgRank($book->id);
+                $book->reviewCount = $reviewModel->getReviewCount($book->id);
+            }
+        }else{
+            $rentalRecommendedBooks = null;
+            $reviewRecommendedBooks = null;
+        }
+        $apiModel = new NaturalLanguageModel();
+        $a = $apiModel->allScoreSort();
+//        dd($a);
+//        $reviews = DB::table('review')
+//            ->get();
+//        foreach($reviews as $review){
+//            $apiModel->sentimentAnalysis($review->book_id,$review->Impressions);
+//        }
+
+
         return view('home',[
             'books'=>$books,
             'reviewRecommendedBooks' => $reviewRecommendedBooks,

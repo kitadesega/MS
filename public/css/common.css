@@ -1,0 +1,349 @@
+@charset "UTF-8";
+body{
+    color: #444444;
+    background: #f7fcfe;
+}
+img{
+	width: 100%;
+	vertical-align: bottom;
+}
+li{
+    list-style: none;
+}
+
+
+header{
+    height: 120px;
+    background: #444444;
+}
+
+.daikei{
+    position: relative;
+    height: 120px;
+    width: 100%;
+}
+.daikei-bg{
+  height: 0;
+  width: 350px;
+  border-top: 120px solid #dcdcdc;
+  border-right: 50px solid transparent;
+  position: absolute;
+  z-index: 1;
+}
+.daikei p{
+    position: absolute;
+    margin: auto;
+    left: 0;
+    z-index: 2;
+}
+
+.gengo div{
+    width:200px; 
+    font-weight: bold;
+    text-align: center;
+    background: #dcdcdc;
+}
+
+
+aside{
+    padding-top: 30px;
+}
+
+.side{
+    margin-top: 50px;
+    position: relative;
+    height: 100px;
+    width: 100%;
+}
+
+.side p{
+    position: absolute;
+    margin: auto;
+    left: 0;
+    z-index: 2;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 32px 16px;
+}
+
+.side-bg{
+  height: 0;
+  width: 250px;
+  border-top: 100px solid #dcdcdc;
+  border-right: 50px solid transparent;
+  position: absolute;
+  z-index: 1;
+}
+
+.karikensaku{
+    width: 1000px;
+    height: 80px;
+}
+
+
+.more-search div{
+    width: 200px;
+    margin-right: 20px;
+}
+
+.search-select{
+    width: 100%;
+}
+
+.osusume{
+    width: 300px;
+    height: 430px;
+    position: relative;
+    margin-right: 30px;
+}
+.osusume-img{
+    width: 260px;
+    margin: 0 auto;
+    background: red;
+    text-align: center;
+    padding-top: 20px;
+}
+.osusume-img img{
+    width: 220px;
+}
+.osusume-kate{
+    color: #fff;
+    font-weight: bold;
+    position: absolute;
+    bottom: 70px;
+    left: 12px;
+    padding: 6px 20px;
+    background: black;
+    z-index: 3;
+}
+.osusume-title1{
+    position: absolute;
+    bottom: 80px;
+    left: 0;
+    height: 0px;
+    width: 300px;
+    border-bottom: 30px solid #dcdcdc;
+    border-left: 300px solid transparent;
+}
+.osusume-title2{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 300px;
+    height: 80px;
+    background: #dcdcdc;
+}
+.osusume-title2 p{
+
+}
+
+.hirano{
+    height: 62px;
+    overflow: hidden;
+    width: 100%;
+    text-align:justify;
+    text-justify:inter-ideograph;
+}
+.hirano p{
+    padding: 20px 14px;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 23px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.se-menu{
+    width: 360px;
+    background: red;
+}
+
+.se-card{
+    width: 1000px;
+    height: 320px;
+    position: relative;
+}
+.se-card top{
+    position: relative;
+}
+.se-card a{
+    position: absolute;
+    width: 1000px;
+    height: 320px;
+    z-index: 10;
+}
+
+.se-block-w{
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    height: 0;
+    width: 930px;
+    border-top: 260px solid #dcdcdc;
+    border-right: 120px solid transparent;
+    z-index: 1;
+}
+.se-block-g{
+    position: absolute;
+    top: 60px;
+    z-index: 2;
+    height: 0;
+    width: 1000px;
+    border-top: 200px solid blue;
+    border-right: 96px solid transparent;
+    opacity: 0.3;
+}
+.se-pic{
+    position: absolute;
+    top: 0;
+    left: 34px;
+    z-index: 3;
+    width: 212px;
+    height: 320px;
+    background: red;
+}
+.se-kate{
+    position: absolute;
+    top: 44px;
+    left: 260px;
+    z-index: 4;
+    color: #fff;
+    font-weight: bold;
+    padding: 6px 20px;
+    background: black;
+}
+.se-text-block{
+    position: absolute;
+    top: 90px;
+    left: 260px;
+    z-index: 5;
+    width: 580px;
+    height: 180px;
+    background: #666666;
+    overflow: hidden;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*-- モーダルウィンドウCSS --*/
+
+.modal-wrapper {
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 60px 10px;
+  text-align: center
+}
+
+.modal-wrapper:not(:target) {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s, visibility .3s;
+}
+
+.modal-wrapper:target {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .4s, visibility .4s;
+}
+
+.modal-wrapper::after {
+  display: inline-block;
+  height: 100%;
+  margin-left: -.05em;
+  vertical-align: middle;
+  content: ""
+}
+
+.modal-wrapper .modal-window {
+  box-sizing: border-box;
+  display: inline-block;
+  z-index: 20;
+  position: relative;
+  width: 70%;
+  max-width: 600px;
+  padding: 30px 30px 15px;
+  border-radius: 2px;
+  background: #fff;
+  box-shadow: 0 0 30px rgba(0, 0, 0, .6);
+  vertical-align: middle
+}
+
+.modal-wrapper .modal-window .modal-content {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-overlay {
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, .8)
+}
+
+.modal-wrapper .modal-close {
+  z-index: 20;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 35px;
+  color: #95979c !important;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 35px;
+  text-align: center;
+  text-decoration: none;
+  text-indent: 0
+}
+
+.modal-wrapper .modal-close:hover {
+  color: #2b2e38 !important
+}
+
+/*-- モーダルウィンドウCSS ここまで --*/
+
+

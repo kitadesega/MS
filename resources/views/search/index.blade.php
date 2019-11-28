@@ -52,47 +52,58 @@
     }
 </style>
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="panel-body">テスト</div>
-{{--                        <form action="/search/allSelect" method="post" accept-charset="utf-8">--}}
-{{--                            {{ csrf_field() }}--}}
-{{--                            <button type="submit" class="btn btn-primary">全件検索</button>--}}
-{{--                        </form>--}}
+    <div class="row">
 
-{{--                        <hr />--}}
+        <div class="col-10 p-3">
 
-                        <form action="/search/titleSelect" method="post" accept-charset="utf-8">
-                            {{ csrf_field() }}
-                            <p>タイトル検索</p>
-                            <input type="text" name="titleword" value="" placeholder="">
-                            <button type="submit" class="btn btn-primary">検索</button>
-                        </form>
+            <h1>キーワード検索</h1>
+            <div class="karikensaku">
+                <form action="/search/titleSelect" method="post" accept-charset="utf-8">
+                    {{ csrf_field() }}
+                    <p>タイトル検索</p>
+                    <input type="text" name="titleword" value="" placeholder="">
+                    <button type="submit">検索</button>
+                </form>
+            </div>
 
-{{--                        <hr />--}}
-
-{{--                        <form action="/search/fuzzySelect" method="post" accept-charset="utf-8">--}}
-{{--                            {{ csrf_field() }}--}}
-{{--                            <p>概要あいまい検索</p>--}}
-{{--                            <input type="text" name="fuzzyword" value="" placeholder="">--}}
-{{--                            <button type="submit" class="btn btn-primary">検索</button>--}}
-{{--                        </form>--}}
-
-{{--                        <hr />--}}
-
-{{--                        <form action="/search/genreSelect" method="post" accept-charset="utf-8">--}}
-{{--                            {{ csrf_field() }}--}}
-{{--                            <input type="text" name="fuzzyword" value="" placeholder="">--}}
-{{--                            <button type="submit" class="btn btn-primary">おすすめ表示(検索は概要で)</button>--}}
-{{--                        </form>--}}
-                    </div>
-
+            <h2>詳細検索</h2>
+            <div class="more-search d-flex">
+                <div>
+                    <h4>大ジャンル</h4>
+                    <select  class="search-select">
+                        <option>1</option>
+                    </select>
+                </div>
+                <div>
+                    <h4>小ジャンル</h4>
+                    <select  class="search-select">
+                        <option>1</option>
+                    </select>
+                </div>
+                <div>
+                    <h4>出版年数</h4>
+                    <select class="search-select">
+                        <option>1</option>
+                    </select>
                 </div>
             </div>
-        </div>
-    </div>
+
+            <h1>おすすめ</h1>
+
+            <div class="se-card">
+                <div class="se-card-top">
+                    <a href="ms-search-details.html"></a>
+                    <div class="se-block-w"></div>
+                    <div class="se-block-g"></div>
+                    <div class="se-pic"></div>
+                    <div class="se-kate">ジャンル</div>
+                    <div class="se-text-block">
+                        <div class="se-ti">
+                            <p>タイトル、著者、出版社、出版年数、レビュー（件数）</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="ms-search-details.html"a></a>
+            </div>
 @endsection
 
