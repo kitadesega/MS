@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BooksModel;
 use App\Models\SearchModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -10,30 +11,24 @@ class SearchController extends Controller
 {
     //
     public function index(){
-    	return view('search.index');
+        $booksModel = new BooksModel();
+        $largegenres = $booksModel->getLargegenreList();
+        $smallgenres = $booksModel->getSmallgenreList();
+    	return view('search.index',['largegenres' => $largegenres,'smallgenres' => $smallgenres]);
     }
 
-    public function allSelect(Request $request){
-    	//$data = DB::select('select * from books where detail LIKE "%' . $request->result . '%"');
-    	//$data = DB::select('select * from books');
-    	$searchModel = new SearchModel();
-   
-    	$data = $searchModel->getBooks();
-    	return view('search.selecttest', ['result'=>$data]);
-    }
-
-    public function titleSelect(Request $request){
+    public function search(Request $request){
         $searchModel = new SearchModel();
-   
-        $data = $searchModel->getTitleBooks($request->titleword);
-        return view('search.selecttest', ['result'=>$data]);
-    }
+        $booksModel = new BooksModel();
+        $largegenres = $booksModel->getLargegenreList();
+        $smallgenres = $booksModel->getSmallgenreList();
+        $largegenre = $request->input('largegenre');
+        $smallgenre = $request->input('smallgenre');
+        $emotion = $request->input('emotion');
 
-    public function fuzzySelect(Request $request){
-    	$searchModel = new SearchModel();
-   
-    	$data = $searchModel->getFuzzyBooks($request->fuzzyword);
-    	return view('search.selecttest', ['result'=>$data]);
+        $books = $searchModel->searchBooks($largegenre,$smallgenre,$emotion);
+
+        return view('search.result', ['result'=>$books,'largegenres' => $largegenres,'smallgenres' => $smallgenres]);
     }
 
     public function genreSelect(Request $request){
@@ -50,4 +45,5 @@ class SearchController extends Controller
 
     	return view('search.recommend')->with(['titletagrecomend'=>$titletagRecomend, 'genrerecomend'=>$genreRecomend, 'result'=>$datas]);
     }
+
 }

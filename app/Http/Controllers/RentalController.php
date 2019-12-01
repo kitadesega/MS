@@ -21,6 +21,7 @@ class RentalController extends Controller
         $rentalModel = new RentalModel();
         $rentalHistory = $rentalModel->getRentalHistory(Auth::user()->id);
 
+
         return view('rental.rental_history',['rentalHistory' => $rentalHistory]);
     }
 

@@ -49,6 +49,17 @@ class ReviewModel extends Model
         return $reviewCount;
     }
 
+    public function getReviewAndScore($userId){
+        $result = DB::table('review')
+            ->join('naturallanguage','review.id','=','naturallanguage.review_id')
+            ->join('books','books.id','=','review.book_id')
+            ->where('review.user_id','=',$userId)
+            ->paginate(15);
+
+        return $result;
+
+    }
+
 
 
 }

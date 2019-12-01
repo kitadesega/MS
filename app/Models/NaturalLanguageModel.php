@@ -9,7 +9,7 @@ use Google\Cloud\Language\LanguageClient;
 
 class NaturalLanguageModel extends Model
 {
-    public function sentimentAnalysis($bookId,$reviewText){
+    public function sentimentAnalysis($bookId,$reviewId,$reviewText){
         $config = config_path().'/json/My First Project-afd2f228a06e.json';
 
         putenv("GOOGLE_APPLICATION_CREDENTIALS=$config");
@@ -20,13 +20,14 @@ class NaturalLanguageModel extends Model
         ]);
 
         $text = $reviewText;
-
         $annotation = $language->analyzeSentiment($text);
+
         $sentiment = $annotation->sentiment();
 
         DB::table('naturallanguage')
             ->insert([
                 'book_id' => $bookId,
+                'review_id' => $reviewId,
                 'score' => $sentiment['score'],
                 'magnitude' => $sentiment['magnitude'],
 
@@ -57,4 +58,5 @@ class NaturalLanguageModel extends Model
         //ソートしてキーの振り直しをして返す
         return $items->sortByDesc('avg_score')->values();
     }
+
 }

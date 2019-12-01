@@ -15,6 +15,7 @@ class CreateNaturallanguageTable extends Migration
     {
         Schema::create('naturallanguage', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('review_id');
             $table->integer('book_id');
             $table->float('score');
             $table->float('magnitude');

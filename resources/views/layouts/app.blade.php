@@ -137,6 +137,12 @@
     <div class="row">
         <aside class="col-2">
             <div class="side">
+                <a href="/mypage">
+                    <p>マイページ</p>
+                </a>
+                <div class="side-bg"></div>
+            </div>
+            <div class="side">
                 <a href="/search">
                     <p>検索</p>
                 </a>
@@ -151,12 +157,6 @@
             <div class="side">
                 <a href="/rental/returnBookInput">
                     <p>返却</p>
-                </a>
-                <div class="side-bg"></div>
-            </div>
-            <div class="side">
-                <a href="/rental/history">
-                    <p>履歴</p>
                 </a>
                 <div class="side-bg"></div>
             </div>

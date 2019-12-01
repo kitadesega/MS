@@ -38,6 +38,22 @@ class BooksModel extends Model
 
     }
 
+    //大ジャンルの種類を取得
+    public function getLargegenreList(){
+        return DB::table('books')
+            ->select('largegenre')
+            ->groupBy('largegenre')
+            ->get();
+    }
+
+    //大ジャンルの種類を取得
+    public function getSmallgenreList(){
+        return DB::table('books')
+            ->select('smallgenre')
+            ->groupBy('smallgenre')
+            ->get();
+    }
+
     //レンタル履歴からおすすめの本を小ジャンルから抽出
     public function rentalRecommendedBooks($userId){
 
@@ -80,11 +96,11 @@ class BooksModel extends Model
 
     public function reviewRecommendedBooks($userId){
 
-        $avgRanksAndSmallgenres = $this->getAvgRankAndSmallgenres($userId);
+        $avgRanksAndLargegenre = $this->getAvgRankAndLargegenre($userId);
 
         // foreachで1つずつ値を取り出す。カテゴリをキーに中に平均ランクを。
-        foreach ($avgRanksAndSmallgenres as $value) {
-            $avgRanks[$value->smallgenre] = $value->avg_rank;
+        foreach ($avgRanksAndLargegenre as $value) {
+            $avgRanks[$value->largegenre] = $value->avg_rank;
         }
 
         //平均評価が高い順にソート
@@ -92,16 +108,18 @@ class BooksModel extends Model
 
         //評価の高いトップ３のカテゴリー(キー)を取得し配列へ
         for($i=0;$i<=2;$i++){
-            $smallgenres[] = key((array_slice($avgRanks, $i, 1, true)));
+            $largegenres[] = key((array_slice($avgRanks, $i, 1, true)));
         }
 
+//        dd($largegenres);
         $books = array();
 
         //トップ3のカテゴリーの本を取得して１つの配列に
-        foreach ($smallgenres as $smallgenre){
-            $tmpBooks = $this->getBooksForSmallgenre($smallgenre);
+        foreach ($largegenres as $largegenre){
+            $tmpBooks = $this->getBooksForLargegenre($largegenre);
             $books = array_merge_recursive($books, $tmpBooks->all());
         }
+
 
         //本の平均評価の取得とソート用の配列の作成
         foreach ((array) $books as $key => $book) {
@@ -112,52 +130,78 @@ class BooksModel extends Model
         //平均評価の大きい順に本を並び替え
         array_multisort($sort, SORT_DESC, $books);
 
+        dd($books);
+
         //上位5冊を取得
         for($i=0; $i<5; $i++){
             if(!empty($books)) {
                 $ReBooks[] = $books[$i];
             }
         }
+
         return $books;
 
 
     }
 
     //ユーザーIDからカテゴリーとその平均評価を取得
-    public function getAvgRankAndSmallgenres($userId){
-        return DB::table('review')
-            ->select(DB::raw('avg(review.rank) as avg_rank,books.smallgenre'))
+    public function getAvgRankAndLargegenre($userId){
+        $results =  DB::table('review')
+            ->select(DB::raw('avg(naturallanguage.score) as avg_rank,books.largegenre'))
+            ->join('naturallanguage','naturallanguage.book_id','=','review.book_id')
             ->join('books','review.book_id','=','books.id')
             ->where('review.user_id','=',$userId)
-            ->groupBy('books.smallgenre')
+            ->groupBy('books.largegenre')
             ->get();
+
+        foreach ($results as $result){
+            $result->avg_rank = round($result->avg_rank, 2);
+        }
+
+        return $results;
     }
 
     //カテゴリーから本を取得
-    public function getBooksForSmallgenre($smallgenre){
+    public function getBooksForLargegenre($largegenre){
         return DB::table('books')
-            ->where('books.smallgenre','=',$smallgenre)
+            ->where('books.largegenre','=',$largegenre)
             ->get();
     }
 
-    //本のIDから平均評価を取得
+    //本のIDから平均スコアを取得
     public function getAvgRank($bookId){
-        $tmpRanks = DB::table('review')
-            ->select('rank')
+        $tmpScores = DB::table('naturallanguage')
+            ->select('score')
             ->where('book_id','=',$bookId)
             ->get();
 
-        if(!$tmpRanks->isEmpty()) {
+        if(!$tmpScores->isEmpty()) {
             //連想配列を配列に
-            foreach ($tmpRanks as $rank) {
-                $Ranks[] = $rank->rank;
+            foreach ($tmpScores as $score) {
+                $Scores[] = $score->score;
             }
             //平均値を求める
-            $avg = round(array_sum($Ranks) / count($Ranks),2);
+            $avg = round(array_sum($Scores) / count($Scores),4);
         }else{
             $avg = 0;
         }
 
         return $avg;
+    }
+
+    //感情スコアを元にしたソート
+    public function getBookScoreSort($user_id){
+
+
+    }
+
+    //本の平均スコアを取得
+    public function getAvgScoreAndBookId($bookId){
+        return DB::table('naturallanguage')
+            ->select(DB::raw('avg(naturallanguage.score) as avg_score,books.id'))
+            ->join('books','naturallanguage.book_id','=','books.id')
+            ->where('naturallanguage.book_id','=',$bookId)
+            ->groupBy('naturallanguage.book_id')
+            ->first();
     }
 }

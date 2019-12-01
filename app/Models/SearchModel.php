@@ -29,25 +29,39 @@ class SearchModel extends Model
     		->get();
     }
 
-    //おすすめジャンル検索
-    public function getTitletagBooks($titleTag, $rejectmainbook)
-    {
-    	$titleRecomend = DB::table('books')
-    		->where('titletag','=', $titleTag)
-    		->where('id','<>', $rejectmainbook)
-    		->get();
+    public function searchBooks($largegenre,$smallgenre,$emotion){
 
-    	return $titleRecomend;
+        $allBooks = DB::table('books')->get();
+        if(!empty($emotion)){
+            foreach($allBooks as $book){
+                $book->avg_score = $this->getAvgScore($book->id);
+            }
+            $allBooks->sortByDesc('avg_score')->values();
+        }
+
+//dd($largegenre,$smallgenre);
+        if(!empty($largegenre)){
+            $allBooks = $allBooks->where('largegenre', $largegenre)->values();;
+        }
+
+        if(!empty($smallgenre)){
+            $allBooks = $allBooks->where('smallgenre', $smallgenre)->values();;
+        }
+
+
+        return $allBooks;
+
     }
-    
-    public function getGenreBooks($smallGenre, $rejectmainbook)
-    {
-    	$genreRecomend = DB::table('books')
-    		->where('smallgenre','=', $smallGenre)
-    		->where('id','<>', $rejectmainbook)
-    		->get();
 
-    	return $genreRecomend;
+    public function getAvgScore($bookId){
+        $avgScore =  DB::table('naturallanguage')
+            ->select(DB::raw('avg(naturallanguage.score) as avg_score'))
+            ->join('books','naturallanguage.book_id','=','books.id')
+            ->where('naturallanguage.book_id','=',$bookId)
+            ->groupBy('naturallanguage.book_id')
+            ->value('avg_score');
+
+//        if($avgScore)
     }
 
 

@@ -34,14 +34,15 @@ class HomeController extends Controller
         $reviewModel = new ReviewModel();
         $books = $booksModel->getBooks();
 
+//        dd($booksModel->getAvgScoreAndBookId(17));
         //貸出状態が1(貸出中)であれば返却日を入れる
         foreach ($books as $book){
             $book->returnDay = '';
             if($book->rental_flag === 1) {
                 $book->returnDay = $rentalModel->returnDay($book->id);
             }
-            $book->starAvg = $reviewModel->getAvgRank($book->id);
-            $book->reviewCount = $reviewModel->getReviewCount($book->id);
+//            $book->starAvg = $reviewModel->getAvgRank($book->id);
+//            $book->reviewCount = $reviewModel->getReviewCount($book->id);
         }
 
         if(Auth::user()){
@@ -51,31 +52,33 @@ class HomeController extends Controller
             $reviewRecommendedBooks = $booksModel->reviewRecommendedBooks(Auth::user()->id);
 
             foreach ($rentalRecommendedBooks as $book){
-                $book->starAvg = $reviewModel->getAvgRank($book->id);
-                $book->reviewCount = $reviewModel->getReviewCount($book->id);
+                $book->starAvg = $booksModel->getAvgRank($book->id);
+//                $book->reviewCount = $reviewModel->getReviewCount($book->id);
             }
+//            dd($rentalRecommendedBooks);
 
-            foreach ($reviewRecommendedBooks as $book){
-                $book->starAvg = $reviewModel->getAvgRank($book->id);
-                $book->reviewCount = $reviewModel->getReviewCount($book->id);
-            }
+//            foreach ($reviewRecommendedBooks as $book){
+//                $book->starAvg = $reviewModel->getAvgRank($book->id);
+//                $book->reviewCount = $reviewModel->getReviewCount($book->id);
+//            }
         }else{
             $rentalRecommendedBooks = null;
             $reviewRecommendedBooks = null;
         }
+
         $apiModel = new NaturalLanguageModel();
-        $a = $apiModel->allScoreSort();
-//        dd($a);
+//        $a = $apiModel->allScoreSort();
+
 //        $reviews = DB::table('review')
 //            ->get();
 //        foreach($reviews as $review){
-//            $apiModel->sentimentAnalysis($review->book_id,$review->Impressions);
+//            $apiModel->sentimentAnalysis($review->book_id,$review->id,$review->Impressions);
 //        }
 
 
         return view('home',[
             'books'=>$books,
-            'reviewRecommendedBooks' => $reviewRecommendedBooks,
+//            'reviewRecommendedBooks' => $reviewRecommendedBooks,
             'rentalRecommendedBooks' => $rentalRecommendedBooks
         ]);
     }

@@ -36,10 +36,12 @@ class RentalModel extends Model
             ->update(['return_flag' => 1]);
     }
 
+    //本の貸し出し履歴
     public function getRentalHistory($userId){
         return DB::table('rental')
             ->join('books','books.id','=','rental.book_id')
             ->where('user_id','=',$userId)
             ->get();
     }
+
 }

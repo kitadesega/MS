@@ -34,12 +34,14 @@ Route::prefix('rental')->group(function () {
 
 Route::prefix('search')->group(function(){
 	Route::get('/', 'SearchController@index')->name('search');
-	Route::post('allSelect', 'SearchController@allSelect')->name('select');
-	Route::post('titleSelect', 'SearchController@titleSelect')->name('select');
-	Route::post('fuzzySelect', 'SearchController@fuzzySelect')->name('select');
+	Route::post('books', 'SearchController@search')->name('select');
+	Route::post('sort', 'SearchController@sort')->name('select');
 	Route::post('genreSelect', 'SearchController@genreSelect')->name('select');
 });
 
+Route::prefix('mypage')->group(function (){
+    Route::get('/', 'MypageController@index')->name('mypage');
+});
 //バーコード本検索
 Route::post('/ajaxBookSearch', 'RentalController@ajaxBookSearch');
 
