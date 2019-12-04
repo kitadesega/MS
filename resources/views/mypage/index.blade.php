@@ -52,14 +52,42 @@
     }
 </style>
 @section('content')
-    <div class="container">
-        <h1>スコアグラフ</h1>
-        <canvas id="myLineChart"></canvas>
-        <div style="margin-left:80px;margin-top:-20px">
-            @foreach($history as $book)
-                <img style="width:50px;margin-left:15px"src="{{ asset('image/'.$book->image) }}" >
-            @endforeach
+
+
+        <div class="top-rireki">
+            <h1>データ</h1>
+                <canvas id="myLineChart"></canvas>
+                <div style="margin-left:80px;margin-top:-20px">
+                    @foreach($history as $book)
+                        <img style="width:50px;margin-left:15px"src="{{ asset('image/'.$book->image) }}" >
+                    @endforeach
+                </div>
         </div>
+
+        <div class="top-kisetsu">
+            <h1>データからのおすすめ</h1>
+                @foreach($books as $key => $book)
+                    @if( $key%4 === 0)
+                    <div class="osusume-block d-flex justify-content-between">
+                        @endif
+                        <div class="osusume">
+                            <div class="osusume-img">
+                                <img src="{{ asset('image/'.$book->image) }}">
+                            </div>
+                            <div class="osusume-kate">{{ $book->largegenre }}</div>
+                            <div class="osusume-title1"></div>
+                            <div class="osusume-title2">
+                                <div class="hirano">
+                                    <p>{{ $book->title }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        @if( $key%4 === 3 || $book === end($books))
+                    </div>
+                        @endif
+                @endforeach
+
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
 
         <script>
@@ -148,6 +176,6 @@
                 }
             });
         </script>
-    </div>
+
 @endsection
 

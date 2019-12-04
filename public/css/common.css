@@ -2,6 +2,8 @@
 body{
     color: #444444;
     background: #f7fcfe;
+    background: lightblue;
+    padding-top: 80px;
 }
 img{
 	width: 100%;
@@ -12,9 +14,14 @@ li{
 }
 
 
-header{
-    height: 120px;
+.syoshi-menu{
+    width: 100%;
+    height: 80px;
     background: #444444;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
 }
 
 .daikei{
@@ -35,10 +42,13 @@ header{
     margin: auto;
     left: 0;
     z-index: 2;
+    font-weight: normal;
+    font-size: 40px;
 }
 
-.gengo div{
-    width:200px; 
+.geNGO {
+    width: 280px; 
+    height: 80px;
     font-weight: bold;
     text-align: center;
     background: #dcdcdc;
@@ -46,14 +56,25 @@ header{
 
 
 aside{
+    width: 380px;
     padding-top: 30px;
 }
 
+.side-block{
+    position: fixed;
+    width: 250px;
+    height: 100%;
+    margin-top: 30px;
+    
+}
+
+
 .side{
-    margin-top: 50px;
+    margin-top: 20px;
     position: relative;
     height: 100px;
     width: 100%;
+    background: #444; 
 }
 
 .side p{
@@ -63,22 +84,55 @@ aside{
     z-index: 2;
     font-size: 1.5rem;
     font-weight: bold;
-    padding: 32px 16px;
+    padding: 32px 20px;
 }
 
 .side-bg{
   height: 0;
-  width: 250px;
+  width: 220px;
   border-top: 100px solid #dcdcdc;
   border-right: 50px solid transparent;
   position: absolute;
   z-index: 1;
 }
 
-.karikensaku{
-    width: 1000px;
-    height: 80px;
+.side2{
+    margin-top: 20px;
+    position: relative;
+    height: 110px;
+    width: 300px;
+    background: #888888;
 }
+
+.side2 p{
+  text-align: center;
+  width: 100%;
+  display: block;
+  position: absolute;
+  top: 50%;
+  -webkit-transform : translateY(-50%);
+  transform : translateY(-50%);
+    z-index: 2;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+
+
+
+.side-first{
+    margin-top: 30px;
+}
+
+
+
+.top-kisetsu{
+    margin-top: 50px;
+}
+.top-rireki{
+    margin-top: 50px;
+}
+
 
 
 .more-search div{
@@ -90,16 +144,21 @@ aside{
     width: 100%;
 }
 
+.osusume-block{
+    margin-right: 120px;
+    margin-top: 20px;
+}
+
 .osusume{
     width: 300px;
     height: 430px;
     position: relative;
-    margin-right: 30px;
+    margin-right: 40px;
 }
 .osusume-img{
     width: 260px;
     margin: 0 auto;
-    background: red;
+    background: white;
     text-align: center;
     padding-top: 20px;
 }
@@ -154,6 +213,10 @@ aside{
     -webkit-line-clamp: 2;
 }
 
+.result{
+    margin-top: 50px;   
+}
+
 .se-menu{
     width: 360px;
     background: red;
@@ -163,6 +226,7 @@ aside{
     width: 1000px;
     height: 320px;
     position: relative;
+    margin-top: 30px;
 }
 .se-card top{
     position: relative;
@@ -203,6 +267,11 @@ aside{
     height: 320px;
     background: red;
 }
+.se-pic img{
+    width: 100%;
+    height: 100%;
+}
+
 .se-kate{
     position: absolute;
     top: 44px;
@@ -220,15 +289,52 @@ aside{
     z-index: 5;
     width: 580px;
     height: 180px;
-    background: #666666;
     overflow: hidden;
 }
 
+.se-ti{
+    
+}
 
+.se-read{
+    height: 44px;
+    overflow: hidden;
+    width: 100%;
+    text-align:justify;
+    text-justify:inter-ideograph;
+}
+.se-read p{
+    padding: 0px 0;
+    font-size: 18px;
+    line-height: 23px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
 
+.search-op{
+    position: fixed;
+    top: 160px;
+    right: 0;
+    width: 350px;
+    height: 500px;
+    background: #888888;
+    padding: 5px 10px;
+}
 
+.search-op h1{
+    text-align: center;
+}
+.search-op p{
+    margin-bottom: 5px;
+}
 
-
+.card-syousai{
+    max-width: 1320px;
+    margin-top: 30px;
+    background: white;
+    padding: 20px 0;
+}
 
 
 
@@ -268,12 +374,10 @@ aside{
 .modal-wrapper {
   z-index: 999;
   position: fixed;
-  top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  padding: 60px 10px;
-  text-align: center
+  top: 0;
 }
 
 .modal-wrapper:not(:target) {
@@ -293,26 +397,25 @@ aside{
   height: 100%;
   margin-left: -.05em;
   vertical-align: middle;
-  content: ""
+  content: "";
 }
 
 .modal-wrapper .modal-window {
-  box-sizing: border-box;
-  display: inline-block;
   z-index: 20;
   position: relative;
-  width: 70%;
-  max-width: 600px;
   padding: 30px 30px 15px;
-  border-radius: 2px;
   background: #fff;
-  box-shadow: 0 0 30px rgba(0, 0, 0, .6);
-  vertical-align: middle
 }
 
-.modal-wrapper .modal-window .modal-content {
-  max-height: 80vh;
-  overflow-y: auto;
+.mo-pos{
+    position: absolute;
+    bottom: 0;
+}
+.modal-window {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
 }
 
 .modal-overlay {
@@ -322,28 +425,18 @@ aside{
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(0, 0, 0, .8)
-}
-
-.modal-wrapper .modal-close {
-  z-index: 20;
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 35px;
-  color: #95979c !important;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 35px;
-  text-align: center;
-  text-decoration: none;
-  text-indent: 0
+  background: rgba(0, 0, 0,0.2)
 }
 
 .modal-wrapper .modal-close:hover {
-  color: #2b2e38 !important
+  color: #2b2e38;
 }
 
+.modal-content{
+    min-height: 200px;
+    max-height: 200px;
+    border: none;
+}
 /*-- モーダルウィンドウCSS ここまで --*/
 
 

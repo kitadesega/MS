@@ -94,6 +94,7 @@ class BooksModel extends Model
 
     }
 
+    //感情分析からのおすすめ
     public function reviewRecommendedBooks($userId){
 
         $avgRanksAndLargegenre = $this->getAvgRankAndLargegenre($userId);
@@ -130,16 +131,18 @@ class BooksModel extends Model
         //平均評価の大きい順に本を並び替え
         array_multisort($sort, SORT_DESC, $books);
 
-        dd($books);
+
 
         //上位5冊を取得
-        for($i=0; $i<5; $i++){
+        for($i=0; $i<8; $i++){
             if(!empty($books)) {
                 $ReBooks[] = $books[$i];
             }
         }
 
-        return $books;
+//        dd($ReBooks);
+
+        return $ReBooks;
 
 
     }

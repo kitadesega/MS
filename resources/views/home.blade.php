@@ -1,74 +1,114 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
 
-    <h4 style="border-bottom: double 5px #FFC778;">貸出履歴からのおすすめ</h4>
+<div class="container-fluid">
+    <div class="top-rireki">
+        <h1>履歴からのおすすめ</h1>
+        @if($rentalRecommendedBooks)
+            <div class="osusume-block d-flex justify-content-between">
+            @foreach($rentalRecommendedBooks as $book)
 
-    <div class="row justify-content-between m-0" style="padding-bottom:20px;">
-
-    @if($rentalRecommendedBooks)
-        @foreach($rentalRecommendedBooks as $book)
-            <div class="col-2 p-0" id="column1">
-                <a href="/book/show/{{ $book->id }}" class="card">
-                <div class="card w-100 shadow p-2" style="border-style: none;">
-                    <img class="card-img-top" src="{{ asset('image/'.$book->image) }}" alt="Card image cap">
-                    <div class="card-body p-0 title1">
-                        <span class="badge badge-pill badge-primary my-2">{{ $book->smallgenre }}</span>
-                        <h6 class="m-0"><div class="box-read">{{ $book->title }}</div></h6>
-                    </div>
-{{--                    @if($book->starAvg)--}}
-{{--                        <div class="star-ratings-sprite" style="display: inline-block">--}}
-{{--                            <span style="width:{{ $book->starAvg }}%" class="star-ratings-sprite-rating"></span>--}}
-{{--                        </div>--}}
-{{--                        <div style="margin-left:80%">({{ $book->reviewCount }})件</div>--}}
-{{--                    @endif--}}
+            <div class="osusume">
+                <div class="osusume-img">
+                    <img src="{{ asset('image/'.$book->image) }}">
                 </div>
-                </a>
-
+                <div class="osusume-kate">{{ $book->smallgenre }}</div>
+                <div class="osusume-title1"></div>
+                <div class="osusume-title2">
+                    <div class="hirano">
+                        <p>{{ $book->title }}</p>
+                    </div>
+                </div>
             </div>
-        @endforeach
-
-    @else
+            @endforeach
+            </div>
+        @else
             <h2>ログインしてください</h2>
 
-    @endif
-
-
-
+        @endif
     </div>
-
-    <h4 style="border-bottom: double 5px #FFC778;">あなたの趣向からのおすすめ</h4>
-
-    <div class="row justify-content-between m-0">
-{{--    @if($reviewRecommendedBooks)--}}
-{{--        @foreach($reviewRecommendedBooks as $book)--}}
-{{--        <div class="col-2 p-0" id="column1">--}}
-{{--            <a href="/book/show/{{ $book->id }}" class="card">--}}
-{{--            <div class="card w-100 shadow p-2" style="border-style: none;">--}}
-{{--                <img class="card-img-top" src="{{ asset('image/'.$book->image) }}" alt="Card image cap">--}}
-{{--                <div class="card-body p-0 title1">--}}
-{{--                    <span class="badge badge-pill badge-primary my-2">{{ $book->smallgenre }}</span>--}}
-{{--                    <h6 class="m-0" style="color: {{ $book->COLOR }}"><div class="box-read">{{ $book->title }}</div></h6>--}}
-{{--                </div>--}}
-{{--                @if($book->starAvg)--}}
-{{--                    <div class="star-ratings-sprite" style="display: inline-block">--}}
-{{--                        <span style="width:{{ $book->starAvg }}%" class="star-ratings-sprite-rating"></span>--}}
-{{--                    </div>--}}
-{{--                    <div style="margin-left:80%">({{ $book->reviewCount }})件</div>--}}
-{{--                @endif--}}
-{{--            </div>--}}
-{{--            </a>--}}
-{{--        </div>--}}
-{{--        @endforeach--}}
-
-{{--    @else--}}
-{{--        <h2>ログインしてください</h2>--}}
-
-
-{{--    @endif--}}
-
+    <div class="top-kisetsu">
+        <h1>季節のおすすめ</h1>
+        <div class="osusume-block d-flex justify-content-between">
+            <div class="osusume">
+                <div class="osusume-img">
+                    <img src="images/tst.png">
+                </div>
+                <div class="osusume-kate">ジャンル</div>
+                <div class="osusume-title1"></div>
+                <div class="osusume-title2">
+                    <div class="hirano">
+                        <p>ああああああああああああああああああああああああああああああああああああああ</p>
+                    </div>
+                </div>
+            </div>
+            <div class="osusume">
+                <div class="osusume-img">
+                    <img src="images/tst.png">
+                </div>
+                <div class="osusume-kate">ジャンル</div>
+                <div class="osusume-title1"></div>
+                <div class="osusume-title2"></div>
+            </div>
+            <div class="osusume">
+                <div class="osusume-img">
+                    <img src="images/tst.png">
+                </div>
+                <div class="osusume-kate">ジャンル</div>
+                <div class="osusume-title1"></div>
+                <div class="osusume-title2"></div>
+            </div>
+            <div class="osusume">
+                <div class="osusume-img">
+                    <img src="images/tst.png">
+                </div>
+                <div class="osusume-kate">ジャンル</div>
+                <div class="osusume-title1"></div>
+                <div class="osusume-title2"></div>
+            </div>
+        </div>
+        <div class="osusume-block d-flex justify-content-between">
+            <div class="osusume">
+                <div class="osusume-img">
+                    <img src="images/tst.png">
+                </div>
+                <div class="osusume-kate">ジャンル</div>
+                <div class="osusume-title1"></div>
+                <div class="osusume-title2">
+                    <div class="hirano">
+                        <p>ああああああああああああああああああああああああああああああああああああああ</p>
+                    </div>
+                </div>
+            </div>
+            <div class="osusume">
+                <div class="osusume-img">
+                    <img src="images/tst.png">
+                </div>
+                <div class="osusume-kate">ジャンル</div>
+                <div class="osusume-title1"></div>
+                <div class="osusume-title2"></div>
+            </div>
+            <div class="osusume">
+                <div class="osusume-img">
+                    <img src="images/tst.png">
+                </div>
+                <div class="osusume-kate">ジャンル</div>
+                <div class="osusume-title1"></div>
+                <div class="osusume-title2"></div>
+            </div>
+            <div class="osusume">
+                <div class="osusume-img">
+                    <img src="images/tst.png">
+                </div>
+                <div class="osusume-kate">ジャンル</div>
+                <div class="osusume-title1"></div>
+                <div class="osusume-title2"></div>
+            </div>
+        </div>
     </div>
 </div>
+
+
 @endsection
 
