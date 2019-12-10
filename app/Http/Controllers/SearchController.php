@@ -24,11 +24,18 @@ class SearchController extends Controller
         $smallgenres = $booksModel->getSmallgenreList();
         $largegenre = $request->input('largegenre');
         $smallgenre = $request->input('smallgenre');
-        $emotion = $request->input('emotion');
+        $keyword = $request->input('keyword');
 
-        $books = $searchModel->searchBooks($largegenre,$smallgenre,$emotion);
+        $books = $searchModel->searchBooks($keyword,$largegenre,$smallgenre);
 
-        return view('search.result', ['result'=>$books,'largegenres' => $largegenres,'smallgenres' => $smallgenres]);
+        return view('search.result', [
+            'result'=>$books,
+            'largegenres' => $largegenres,
+            'smallgenres' => $smallgenres,
+            'largegenre' => $largegenre,
+            'smallgenre' => $smallgenre,
+            'keyword' => $keyword
+            ]);
     }
 
     public function genreSelect(Request $request){

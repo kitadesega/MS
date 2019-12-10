@@ -29,27 +29,25 @@ class SearchModel extends Model
     		->get();
     }
 
-    public function searchBooks($largegenre,$smallgenre,$emotion){
+    public function searchBooks($keyword,$largegenre,$smallgenre){
 
-        $allBooks = DB::table('books')->get();
-        if(!empty($emotion)){
-            foreach($allBooks as $book){
-                $book->avg_score = $this->getAvgScore($book->id);
-            }
-            $allBooks->sortByDesc('avg_score')->values();
+        $booksQuery = DB::table('books');
+
+        if(!empty($keyword)){
+            $booksQuery = $booksQuery
+                ->orWhere('title','Like', '%'. $keyword .'%')
+                ->orWhere('detail','Like', '%'. $keyword .'%');
         }
-
-//dd($largegenre,$smallgenre);
         if(!empty($largegenre)){
-            $allBooks = $allBooks->where('largegenre', $largegenre)->values();;
+            $booksQuery = $booksQuery->orWhere('largegenre', $largegenre);
         }
 
         if(!empty($smallgenre)){
-            $allBooks = $allBooks->where('smallgenre', $smallgenre)->values();;
+            $booksQuery = $booksQuery->orWhere('smallgenre', $smallgenre);
         }
 
-
-        return $allBooks;
+        $books = $booksQuery->get();
+        return $books;
 
     }
 

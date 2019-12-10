@@ -13,35 +13,47 @@
         </div>
 
         <div class="col-6" id="column2">
-            <div class="mb-2">ホーム>大ジャンル>小ジャンル</div>
-            <h3>{{ $book->title }}</h3>
+{{--            <div class="mb-2">ホーム>大ジャンル>小ジャンル</div>--}}
+            <h3>
+                <p class="langCng" lang="ja">{{ $book->title }}</p>
+                <p class="langCng" lang="en" style="display:none;">{{ $book->enTitle}}</p>
+            </h3>
             <div class="row book-d">
-                <div class="col-2">著者</div>
-                <div class="col-10">{{ $book->auther }}</div>
+                <div class="col-2 langCng" lang="ja">著者</div>
+                <div class="col-2 langCng" lang="en" style="display:none;">Author</div>
+                <div class="col-10 langCng" lang="ja">{{ $book->auther }}</div>
+                <div class="col-10 langCng" lang="en" style="display:none;">{{ $book->enAuther }}</div>
             </div>
             <div class="row book-d">
-                <div class="col-2">出版社</div>
-                <div class="col-10">{{ $book->publisher }}</div>
+                <div class="col-2 langCng" lang="ja">出版社</div>
+                <div class="col-3 langCng" lang="en" style="display:none;">publisher</div>
+                <div class="col-10 langCng" lang="ja">{{ $book->publisher }}</div>
+                <div class="col-9 langCng" lang="en" style="display:none;">{{ $book->enPublisher }}</div>
             </div>
-            <div class="row book-d">
-                <div class="col-4">レビュー評価(平均)</div>
-                <div class="col-7">
-                    @if($book->starAvg)
-                        <div class="star-ratings-sprite" style="display: inline-block">
-                            <span style="width:{{ $book->starAvg }}%" class="star-ratings-sprite-rating"></span>
-                        </div>
-                        <span>({{ $book->reviewCount }})件</span>
-                    @endif
-                </div>
+
+            <h4 class="mt-2 langCng" lang="ja">
+                概要
+            </h4>
+            <h4 class="mt-2 langCng" lang="en" style="display:none;">
+                summary
+            </h4>
+            <div id="langChenge">
+            <div class="mb-3" >
+                <p class="langCng" lang="ja">{{ $book->detail }}</p>
+                <p class="langCng" lang="en" style="display:none;">{{ $book->enDetail }}</p>
             </div>
-            <h4 class="mt-2">内容説明</h4>
-            <div class="mb-3">{{ $book->detail }}</div>
+
+            </div>
             <div class="">
-                <p class="">
+                <p class="langCng" lang="ja">
                     <button type="button" class="btn btn-warning btn-lg btn-block">印刷する</button>
                 </p>
+                <p class="langCng" lang="en" style="display:none;">
+                    <button type="button" class="btn btn-warning btn-lg btn-block">Print</button>
+                </p>
             </div>
-            <a href="/">戻る</a>
+            <a class="langCng" lang="ja" href="/">戻る</a>
+            <a class="langCng" lang="en" style="display:none;" href="/">back</a>
 
         </div>
     </div>
@@ -123,4 +135,25 @@
 <script type="text/javascript">
     $('.bs-component [data-toggle="popover"]').popover();
     $('.bs-component [data-toggle="tooltip"]').tooltip();
+
+    // =========================================================
+    //      選択された言語のみ表示
+    // =========================================================
+    // function langSet(argLang){
+    //
+    //     // --- 切り替え対象のclass一覧を取得 ----------------------
+    //     var elm = document.getElementsByClassName("langCng");
+    //
+    //     for (var i = 0; i < elm.length; i++) {
+    //
+    //         // --- 選択された言語と一致は表示、その他は非表示 -------
+    //         if(elm[i].getAttribute("lang") == argLang){
+    //             elm[i].style.display = '';
+    //         }
+    //         else{
+    //             elm[i].style.display = 'none';
+    //         }
+    //     }
+    // }
 </script>
+

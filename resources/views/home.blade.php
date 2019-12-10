@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
-<div class="container-fluid">
+    <div class="container">
     <div class="top-rireki">
         <h1>履歴からのおすすめ</h1>
         @if($rentalRecommendedBooks)
@@ -107,8 +106,7 @@
             </div>
         </div>
     </div>
-</div>
-
+    </div>
 
 @endsection
 

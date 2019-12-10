@@ -52,7 +52,7 @@
     }
 </style>
 @section('content')
-    <div class="container">
+
 
         <div class="col-10 p-3">
             <form action="/search/books" method="post" accept-charset="utf-8">
@@ -60,7 +60,7 @@
             <div class="karikensaku">
                     {{ csrf_field() }}
                     <p>タイトル検索</p>
-                    <input type="text" name="titleword" value="" placeholder="">
+                    <input type="text" name="keyword" value="" placeholder="">
                     <button type="submit">検索</button>
 
             </div>
@@ -83,17 +83,6 @@
                         @foreach($smallgenres as $smallgenre)
                             <option value="{{ $smallgenre->smallgenre }}">{{ $smallgenre->smallgenre }}</option>
                         @endforeach
-                    </select>
-                </div>
-                <div>
-                    <h4>感想の傾向</h4>
-                    <select class="form-control" name="emotion">
-                        <option>--指定なし--</option>
-                        <option value="5">とてもポジティブ</option>
-                        <option value="4">ポジティブ</option>
-                        <option value="3">ニュートラル</option>
-                        <option value="2">ネガティブ</option>
-                        <option value="1">とてもネガティブ</option>
                     </select>
                 </div>
             </div>

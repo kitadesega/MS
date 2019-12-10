@@ -29,6 +29,14 @@ class HomeController extends Controller
      */
     public function index()
     {
+//        $apiModel = new NaturalLanguageModel();
+////        $a = $apiModel->allScoreSort();
+//
+//        $reviews = DB::table('review')
+//            ->get();
+//        foreach($reviews as $review){
+//            $apiModel->sentimentAnalysis($review->book_id,$review->id,$review->Impressions);
+//        }
         $booksModel = new BooksModel();
         $rentalModel = new RentalModel();
         $reviewModel = new ReviewModel();
@@ -65,15 +73,8 @@ class HomeController extends Controller
             $rentalRecommendedBooks = null;
             $reviewRecommendedBooks = null;
         }
+        $reviewRecommendedBooks = null;
 
-        $apiModel = new NaturalLanguageModel();
-//        $a = $apiModel->allScoreSort();
-
-//        $reviews = DB::table('review')
-//            ->get();
-//        foreach($reviews as $review){
-//            $apiModel->sentimentAnalysis($review->book_id,$review->id,$review->Impressions);
-//        }
 
 
         return view('home',[

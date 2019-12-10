@@ -21,6 +21,14 @@ class ReviewModel extends Model
             ]);
     }
 
+    //本のidからレビューとスコアをセットで取得
+    public function getReviewAndScoreForBookId($bookId){
+        return DB::table('review')
+            ->join('naturallanguage','review.id','=','naturallanguage.review_id')
+            ->where('review.book_id','=',$bookId)
+            ->get();
+    }
+
     public function getAvgRank($bookId){
         $ranks = DB::table('review')
             ->select('rank')
@@ -54,7 +62,7 @@ class ReviewModel extends Model
             ->join('naturallanguage','review.id','=','naturallanguage.review_id')
             ->join('books','books.id','=','review.book_id')
             ->where('review.user_id','=',$userId)
-            ->paginate(15);
+            ->limit(15)->get();
 
         return $result;
 

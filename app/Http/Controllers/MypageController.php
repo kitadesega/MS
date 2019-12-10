@@ -20,7 +20,6 @@ class MypageController extends Controller
         $bookModel = new BooksModel();
         $history = $reviewModel->getReviewAndScore(Auth::user()->id);
         $books = $bookModel->reviewRecommendedBooks(Auth::user()->id);
-
         return view('mypage.index',['history' => $history,'books' => $books]);
     }
 }

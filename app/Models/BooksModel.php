@@ -131,8 +131,6 @@ class BooksModel extends Model
         //平均評価の大きい順に本を並び替え
         array_multisort($sort, SORT_DESC, $books);
 
-
-
         //上位5冊を取得
         for($i=0; $i<8; $i++){
             if(!empty($books)) {

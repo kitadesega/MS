@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="ja">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,7 +11,33 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script>
+        // window.addEventListener('DOMContentLoaded', function () {
+        //         var wDef = (navigator.browserLanguage || navigator.language || navigator.userLanguage).substr(0,2);
+        //         console.log(wDef);
+        //         langSet(wDef);
+        // });
 
+        // =========================================================
+        //      選択された言語のみ表示
+        // =========================================================
+        function langSet(argLang){
+
+            // --- 切り替え対象のclass一覧を取得 ----------------------
+            var elm = document.getElementsByClassName("langCng");
+
+            for (var i = 0; i < elm.length; i++) {
+
+                // --- 選択された言語と一致は表示、その他は非表示 -------
+                if(elm[i].getAttribute("lang") == argLang){
+                    elm[i].style.display = '';
+                }
+                else{
+                    elm[i].style.display = 'none';
+                }
+            }
+        }
+    </script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
@@ -20,6 +46,25 @@
     <!-- Styles -->
 {{--    <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+    <style type="text/css">
+        /* === ラジオボタンは非表示 ================== */
+        #sample1 input[type="radio"]{
+            display    : none;
+        }
+
+        /* === 各ラジオボタンのラベルをボタンに変更 == */
+        #sample1 label{
+            display    : inline-block;
+            border     : 1px solid #ccc;
+            box-shadow : 2px 2px #999;
+            padding    : 2px 6px;
+        }
+
+        /* === 選択されている言語のラベル色を変更 ==== */
+        #sample1 input[type="radio"]:checked + label {
+            background : #ffa64d;
+        }
+    </style>
     <style>
         button {
             background: none;
@@ -81,8 +126,10 @@
             color : inherit;
         }
     </style>
+
 </head>
 <body>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 {{--    <div id="app">--}}
 {{--        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">--}}
 {{--            <div class="container">--}}
@@ -138,9 +185,25 @@
     <div class="d-flex justify-content-end">
         <div class="daikei">
             <p>ホーム</p>
-            <div class="daikei-bg"></div>
+            <div class="daikei-bg">
+
+            </div>
         </div>
         <div class="geNGO">
+            <div id="sample1">
+                <input type="radio" name="langKbn" id="sJa" onClick="langSet('ja')" checked>
+                <label for="sJa">
+                    <span class="langCng" lang="ja">日本語</span>
+                    <span class="langCng" lang="en" style="display: none;">Japanese</span>
+                </label>
+
+                <input type="radio" name="langKbn" id="sEn" onClick="langSet('en')">
+                <label for="sEn">
+                    <span class="langCng" lang="ja">英語</span>
+                    <span class="langCng" lang="en" style="display: none;">English</span>
+                </label>
+
+            </div>
             @guest
             <a class="log-btn" href="#modal-01">ログイン</a>
             @else
@@ -168,29 +231,34 @@
         <div class="side-block">
             <div class="side">
                 <a href="/">
-                    <p>ホーム</p>
+                    <p class="langCng" lang="ja">ホーム</p>
+                    <p class="langCng" lang="en" style="display:none;">HOME</p>
                 </a>
                 <div class="side-bg"></div>
             </div>
             <div class="side">
                 <a href="/mypage">
-                    <p>マイページ</p>
+                    <p class="langCng" lang="ja">マイページ</p>
+                    <p class="langCng" lang="en" style="display:none;">MYPAGE</p>
                 </a>
                 <div class="side-bg"></div>
             </div>
             <div class="side2 side-first">
                 <a href="/search">
-                    <p>検索</p>
+                    <p class="langCng" lang="ja">検索</p>
+                    <p class="langCng" lang="en" style="display:none;">SEARCH</p>
                 </a>
             </div>
             <div class="side2">
                 <a href="/rental/rentBookInput">
-                    <p>貸出</p>
+                    <p class="langCng" lang="ja">貸出</p>
+                    <p class="langCng" lang="en" style="display:none;">RENTAL</p>
                 </a>
             </div>
             <div class="side2">
                 <a href="/rental/returnBookInput">
-                    <p>返却</p>
+                    <p class="langCng" lang="ja">返却</p>
+                    <p class="langCng" lang="en" style="display:none;">RETURN</p>
                 </a>
             </div>
         </div>
@@ -265,10 +333,9 @@
                     </div>
                 </div>
 {{--                <a class="btn btn-primary" href="" role="button">ログイン</a>--}}
+
             </div>
             <a href="#!" class="modal-close">×</a>
-        </div>
-    </div>
         </div>
     </div>
 

@@ -56,10 +56,18 @@
 
         <div class="top-rireki">
             <h1>データ</h1>
+            <img style="width:1000px;margin-left:0px"src="{{ asset('image/'.'load.gif') }}" >
                 <canvas id="myLineChart"></canvas>
                 <div style="margin-left:80px;margin-top:-20px">
-                    @foreach($history as $book)
-                        <img style="width:50px;margin-left:15px"src="{{ asset('image/'.$book->image) }}" >
+
+                    @foreach($history as $key=>$book)
+                        @if ($loop->first)
+                            <img style="width:50px;margin-left:0px"src="{{ asset('image/'.$book->image) }}" >
+                        @elseif ($loop->last)
+                            <img style="width:50px;margin-left:40px"src="{{ asset('image/'.$book->image) }}" >
+                        @else
+                            <img style="width:50px;margin-left:45px"src="{{ asset('image/'.$book->image) }}" >
+                        @endif
                     @endforeach
                 </div>
         </div>
