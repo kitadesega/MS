@@ -56,7 +56,6 @@
 
         <div class="top-rireki">
             <h1>データ</h1>
-            <img style="width:1000px;margin-left:0px"src="{{ asset('image/'.'load.gif') }}" >
                 <canvas id="myLineChart"></canvas>
                 <div style="margin-left:80px;margin-top:-20px">
 

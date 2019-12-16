@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BooksModel;
+use App\Models\NaturalLanguageModel;
 use App\Models\RentalModel;
 use App\Models\ReviewModel;
 use Illuminate\Http\Request;
@@ -91,8 +92,10 @@ class RentalController extends Controller
     public function review(Request $request){
 
     $reviewModel = new ReviewModel();
+    $apiModel = new NaturalLanguageModel();
+    $insertId = $reviewModel->reviewInsert(Auth::user()->id,$request->bookId,$request->Impressions);
 
-    $reviewModel->reviewInsert(Auth::user()->id,$request->bookId,$request->Anonymous_flag,$request->Impressions,$request->rank);
+    $apiModel->sentimentAnalysis($request->bookId,$insertId,$request->Impressions);
 
        return redirect('/reviewComplete');
     }

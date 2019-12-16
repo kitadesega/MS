@@ -8,17 +8,17 @@ use Illuminate\Support\Facades\DB;
 
 class ReviewModel extends Model
 {
-    public function reviewInsert($userId,$bookId,$AnonymousFlag,$Impressions,$rank){
-        DB::table('review')
-            ->insert([
+    public function reviewInsert($userId,$bookId,$Impressions){
+        $insertId = DB::table('review')
+            ->insertGetId([
                 'user_id' => $userId,
                 'book_id' => $bookId,
-                'Anonymous_flag' => $AnonymousFlag,
                 'Impressions' => $Impressions,
-                'rank' => $rank,
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
+
+        return $insertId;
     }
 
     //本のidからレビューとスコアをセットで取得
