@@ -29,15 +29,27 @@ class SearchModel extends Model
     		->get();
     }
 
-    public function searchBooks($keyword,$largegenre,$smallgenre){
+    public function searchBooks($keyword,$largegenre,$smallgenre,$options){
 
         $booksQuery = DB::table('books');
 
-        if(!empty($keyword)){
-            $booksQuery = $booksQuery
-                ->orWhere('title','Like', '%'. $keyword .'%')
-                ->orWhere('detail','Like', '%'. $keyword .'%');
+        switch ($options){
+            case 'title':
+                $booksQuery = $booksQuery
+                    ->orWhere('title','Like', '%'. $keyword .'%');
+                break;
+            case 'auther':
+                $booksQuery = $booksQuery
+                    ->orWhere('auther','Like', '%'. $keyword .'%');
+                break;
+            case 'detail':
+                $booksQuery = $booksQuery
+                    ->orWhere('detail','Like', '%'. $keyword .'%');
+                break;
+            default:
+                break;
         }
+
         if(!empty($largegenre)){
             $booksQuery = $booksQuery->orWhere('largegenre', $largegenre);
         }
@@ -46,7 +58,10 @@ class SearchModel extends Model
             $booksQuery = $booksQuery->orWhere('smallgenre', $smallgenre);
         }
 
+
         $books = $booksQuery->get();
+
+
         return $books;
 
     }

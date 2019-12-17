@@ -20,21 +20,50 @@ class SearchController extends Controller
     public function search(Request $request){
         $searchModel = new SearchModel();
         $booksModel = new BooksModel();
+//        ジャンル一覧
         $largegenres = $booksModel->getLargegenreList();
         $smallgenres = $booksModel->getSmallgenreList();
+        //リクエスト
         $largegenre = $request->input('largegenre');
         $smallgenre = $request->input('smallgenre');
+
         $keyword = $request->input('keyword');
+        $options = $request->input('options');
+        switch ($options){
+            case 'title':
+                $searchType = "タイトル";
+                break;
+            case 'auther':
+                $searchType = "著者";
+                break;
+            case 'detail':
+                $searchType = "概要";
+                break;
+            default:
+                $searchType = "タイトル";
+                break;
+        }
+        $books = $searchModel->searchBooks($keyword,$largegenre,$smallgenre,$options);
+        if($largegenre == ""){
+            $largegenre = "指定無し";
+        }
 
-        $books = $searchModel->searchBooks($keyword,$largegenre,$smallgenre);
+        if($smallgenre == ""){
+            $smallgenre = "指定無し";
+        }
 
+        if($keyword == ""){
+            $keyword = "指定無し";
+        }
         return view('search.result', [
             'result'=>$books,
             'largegenres' => $largegenres,
             'smallgenres' => $smallgenres,
             'largegenre' => $largegenre,
             'smallgenre' => $smallgenre,
-            'keyword' => $keyword
+            'keyword' => $keyword,
+            'searchType' => $searchType
+
             ]);
     }
 
@@ -52,5 +81,6 @@ class SearchController extends Controller
 
     	return view('search.recommend')->with(['titletagrecomend'=>$titletagRecomend, 'genrerecomend'=>$genreRecomend, 'result'=>$datas]);
     }
+
 
 }

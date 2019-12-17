@@ -41,11 +41,16 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/common.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/hov.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/animate.css') }}">
+{{--    <link rel="stylesheet" type="text/css" href="{{ asset('css/tien.css') }}">--}}
+
+
 
     <!-- Styles -->
 {{--    <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
-    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
     <style type="text/css">
         /* === ラジオボタンは非表示 ================== */
         #sample1 input[type="radio"]{
@@ -65,6 +70,18 @@
             background : #ffa64d;
         }
     </style>
+    <script type="text/javascript">
+        $(function($) {
+            var settings = {
+                proximity: 110,
+                parallaxMultiplier: 20,
+                dotColor: "#FFE14E",
+                lineColor: "#FFE14E",
+                particleRadius: 10
+            };
+            $("#particles").particleground(settings);
+        });
+    </script>
     <style>
         button {
             background: none;
@@ -77,43 +94,6 @@
         }
         button:focus {
             outline:0;
-        }
-        /*body {*/
-        /*    margin: 50px;*/
-        /*    text-align: center;*/
-        /*    font-family: 'Open Sans', sans-serif;*/
-        /*    background: #f2fbff;*/
-        /*}*/
-        h1 {
-            font-size: 24px;
-            margin-bottom: 25px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-
-        .star-ratings-sprite {
-            background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
-            font-size: 0;
-            height: 21px;
-            line-height: 0;
-            overflow: hidden;
-            text-indent: -999em;
-            width: 110px;
-            margin: 0 auto;
-        }
-        .star-ratings-sprite-rating {
-            background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
-            background-position: 0 100%;
-            float: left;
-            height: 21px;
-            display: block;
-        }
-
-        .box-read{
-            overflow:hidden;
-            text-overflow: ellipsis;
-            white-space:nowrap;
         }
 
         a {
@@ -130,63 +110,14 @@
 </head>
 <body>
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-{{--    <div id="app">--}}
-{{--        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">--}}
-{{--            <div class="container">--}}
-{{--                <a class="navbar-brand" href="{{ url('/') }}">--}}
-{{--                    HOME--}}
-{{--                </a>--}}
-{{--                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">--}}
-{{--                    <span class="navbar-toggler-icon"></span>--}}
-{{--                </button>--}}
 
-{{--                <div class="collapse navbar-collapse" id="navbarSupportedContent">--}}
-{{--                    <!-- Left Side Of Navbar -->--}}
-{{--                    <ul class="navbar-nav mr-auto">--}}
-
-{{--                    </ul>--}}
-
-{{--                    <!-- Right Side Of Navbar -->--}}
-{{--                    <ul class="navbar-nav ml-auto">--}}
-{{--                        <!-- Authentication Links -->--}}
-{{--                        @guest--}}
-{{--                            <li class="nav-item">--}}
-{{--                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>--}}
-{{--                            </li>--}}
-{{--                            <li class="nav-item">--}}
-{{--                                @if (Route::has('register'))--}}
-{{--                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>--}}
-{{--                                @endif--}}
-{{--                            </li>--}}
-{{--                        @else--}}
-{{--                            <li class="nav-item dropdown">--}}
-{{--                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>--}}
-{{--                                    {{ Auth::user()->name }} <span class="caret"></span>--}}
-{{--                                </a>--}}
-
-{{--                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">--}}
-{{--                                    <a class="dropdown-item" href="{{ route('logout') }}"--}}
-{{--                                       onclick="event.preventDefault();--}}
-{{--                                                     document.getElementById('logout-form').submit();">--}}
-{{--                                        {{ __('Logout') }}--}}
-{{--                                    </a>--}}
-
-{{--                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
-{{--                                        @csrf--}}
-{{--                                    </form>--}}
-{{--                                </div>--}}
-{{--                            </li>--}}
-{{--                        @endguest--}}
-{{--                    </ul>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </nav>--}}
+<div id="particles"></div>
+<div class="image-book"><img src="{{ asset('svg/book-svf.svg') }}"></div>
 <header class="syoshi-menu">
     <div class="d-flex justify-content-end">
         <div class="daikei">
             <p>ホーム</p>
             <div class="daikei-bg">
-
             </div>
         </div>
         <div class="geNGO">
@@ -229,38 +160,71 @@
 <div class="row">
     <aside>
         <div class="side-block">
-            <div class="side">
-                <a href="/">
-                    <p class="langCng" lang="ja">ホーム</p>
-                    <p class="langCng" lang="en" style="display:none;">HOME</p>
-                </a>
-                <div class="side-bg"></div>
-            </div>
-            <div class="side">
-                <a href="/mypage">
-                    <p class="langCng" lang="ja">マイページ</p>
-                    <p class="langCng" lang="en" style="display:none;">MYPAGE</p>
-                </a>
-                <div class="side-bg"></div>
-            </div>
-            <div class="side2 side-first">
-                <a href="/search">
-                    <p class="langCng" lang="ja">検索</p>
-                    <p class="langCng" lang="en" style="display:none;">SEARCH</p>
-                </a>
-            </div>
-            <div class="side2">
-                <a href="/rental/rentBookInput">
-                    <p class="langCng" lang="ja">貸出</p>
-                    <p class="langCng" lang="en" style="display:none;">RENTAL</p>
-                </a>
-            </div>
-            <div class="side2">
-                <a href="/rental/returnBookInput">
-                    <p class="langCng" lang="ja">返却</p>
-                    <p class="langCng" lang="en" style="display:none;">RETURN</p>
-                </a>
-            </div>
+            <a href="/">
+                <div class="side">
+                    <p>ホーム</p>
+                    <div class="side-bg"></div>
+                </div>
+            </a>
+            <a href="/mypage">
+                <div class="side">
+                    <p>マイページ</p>
+                    <div class="side-bg"></div>
+                </div>
+            </a>
+            <a href="/search">
+                <div class="side2 hov-anime-1">
+                    <p>検索</p>
+                    <img src="{{ asset('svg/kashidashi.svg') }}" stroke-width="4" fill="red;" >
+                    <div class="side-cc"></div>
+                </div>
+            </a>
+            <a href="/rental/rentBookInput">
+                <div class="side2 hov-anime-2">
+                    <p>貸出</p>
+                    <img src="{{ asset('svg/rentaru.svg') }}" >
+                    <div class="side-dd"></div>
+                </div>
+            </a>
+            <a href="/rental/returnBookInput">
+                <div class="side2 hov-anime-3">
+                    <p>返却</p>
+                    <img src="{{ asset('svg/henkyaku.svg') }}" stroke-width="4">
+                    <div class="side-ee"></div>
+                </div>
+            </a>
+{{--            <div class="side">--}}
+{{--                <a href="/">--}}
+{{--                    <p class="langCng" lang="ja">ホーム</p>--}}
+{{--                    <p class="langCng" lang="en" style="display:none;">HOME</p>--}}
+{{--                </a>--}}
+{{--                <div class="side-bg"></div>--}}
+{{--            </div>--}}
+{{--            <div class="side">--}}
+{{--                <a href="/mypage">--}}
+{{--                    <p class="langCng" lang="ja">マイページ</p>--}}
+{{--                    <p class="langCng" lang="en" style="display:none;">MYPAGE</p>--}}
+{{--                </a>--}}
+{{--                <div class="side-bg"></div>--}}
+{{--            </div>--}}
+{{--            <div class="side2 side-first">--}}
+{{--                <a href="/search">--}}
+{{--                    <p class="langCng" lang="ja">検索</p>--}}
+{{--                    <p class="langCng" lang="en" style="display:none;">SEARCH</p>--}}
+{{--                </a>--}}
+{{--            </div>--}}
+{{--            <div class="side2">--}}
+{{--                <a href="/rental/rentBookInput">--}}
+{{--                    <p class="langCng" lang="ja">貸出</p>--}}
+{{--                    <p class="langCng" lang="en" style="display:none;">RENTAL</p>--}}
+{{--                </a>--}}
+{{--            </div>--}}
+{{--            <div class="side2">--}}
+{{--                <a href="/rental/returnBookInput">--}}
+{{--                    <p class="langCng" lang="ja">返却</p>--}}
+{{--                    <p class="langCng" lang="en" style="display:none;">RETURN</p>--}}
+{{--                </a>--}}
+{{--            </div>--}}
         </div>
     </aside>
     <article>

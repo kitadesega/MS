@@ -82,7 +82,7 @@ class BooksModel extends Model
         }
 
         //５冊ランダムに選出
-        for($i=0; $i<5; $i++){
+        for($i=0; $i<4; $i++){
             if(!empty($books)) {
                 $tmpNumber = array_rand($books);
                 $randBooks[] = $books[$tmpNumber];
