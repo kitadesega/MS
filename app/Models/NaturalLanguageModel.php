@@ -59,4 +59,43 @@ class NaturalLanguageModel extends Model
         return $items->sortByDesc('avg_score')->values();
     }
 
+    //ユーザーIDからカテゴリーとその平均評価を取得
+    public function getScoreAddition($userId){
+        $results =  DB::table('review')
+            ->join('naturallanguage','naturallanguage.book_id','=','review.book_id')
+            ->join('books','review.book_id','=','books.id')
+            ->where('review.user_id','=',$userId)
+            ->get();
+
+        $positives = array();
+        $negatives = array();
+
+        $positiveTotalScore = 0;
+        $negativeTotalScore = 0;
+        foreach ($results as $result) {
+            $positives[$result->largegenre] = 0;
+            $negatives[$result->largegenre] = 0;
+        }
+
+        foreach ($results as $result){
+            if($result->score > 0) {
+                $positives[$result->largegenre] += $result->score;
+                $positiveTotalScore += $result->score;
+            }else{
+                $negatives[$result->largegenre] += $result->score;
+                $negativeTotalScore += $result->score;
+            }
+        }
+
+        $resultArray = array();
+        $resultArray[] = $positives;
+        $resultArray[] = $positiveTotalScore;
+        $resultArray[] = $negatives;
+        $resultArray[] = $negativeTotalScore;
+
+
+        return $resultArray;
+    }
+
+
 }

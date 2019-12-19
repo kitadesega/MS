@@ -70,6 +70,7 @@
                     @endforeach
                 </div>
         </div>
+        <canvas id="status"></canvas>
 
         <div class="top-kisetsu">
             <h1>データからのおすすめ</h1>
@@ -93,11 +94,89 @@
                     </div>
                         @endif
                 @endforeach
+        </div>
+
+        <div><canvas id="myChart"></canvas></div>
 
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
-
         <script>
+
+
+            var ctx = document.getElementById("status");
+            var myLineChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: [
+                        @foreach($positives as $key=>$value)
+                            '{{ $key }}',
+                        @endforeach
+                    ],
+                    datasets: [
+
+                        {
+                            label: 'ポジティブ度',
+                            data: [
+                                @foreach($positives as $value)
+                                    '{{ round($value / $positiveTotal,2) }}',
+                                @endforeach
+                            ],
+                            lineTension: 0,
+                            fill: true,
+                            // borderWidth: 3,
+                            pointBorderWidth:3,
+                            pointBorderColor: "rgba(255,0,0,1)",
+                            borderColor: "rgba(255,0,0,1)",
+                            backgroundColor: "rgba(255,0,0,.3)"
+                        },
+
+                        {
+                            label: 'ネガティブ度',
+                            data: [
+                                @foreach($negatives as $value)
+                                    '{{ round($value / $negativeTotal,2)  }}',
+                                @endforeach
+                            ],
+                            lineTension: 0,
+                            fill: true,
+                            // borderWidth: 3,
+                            pointBorderWidth:3,
+                            pointBorderColor: "rgba(0,106,182,1)",
+                            borderColor: "rgba(0,106,182,1)",
+                            backgroundColor: "rgba(0,106,182,.3)"
+                        },
+
+                    ],
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: 'あなたの感想のポジティブ度グラフ'
+                    },
+                    scales: {
+                        // xAxes: [{
+                        //     ticks: {
+                        //         maxRotation: 90,
+                        //         minRotation: 90,
+                        //         callback: function(val){
+                        //             if(val.length > 10){
+                        //                 return [val.substr(0, 10), val.substr(10)]
+                        //             }else{
+                        //                 return val;
+                        //             }
+                        //         }
+                        //     }
+                        // }],
+
+
+                    },
+
+                }
+            });
+        </script>
+        <script>
+
+
             var ctx = document.getElementById("myLineChart");
             var myLineChart = new Chart(ctx, {
                 type: 'line',
@@ -120,19 +199,9 @@
                             fill: false,
                             borderWidth: 3,
                             borderColor: "rgba(255,0,0,1)",
-                            backgroundColor: "rgba(0,0,0,0)"
+                            backgroundColor: "rgba(255,0,0,.9)",
                         },
 
-                        {{--{--}}
-                        {{--    label: '重み',--}}
-                        {{--    data: [--}}
-                        {{--        @foreach($history as $value)--}}
-                        {{--            '{{$value->magnitude}}',--}}
-                        {{--        @endforeach--}}
-                        {{--    ],--}}
-                        {{--    borderColor: "rgba(0,0,255,1)",--}}
-                        {{--    backgroundColor: "rgba(0,0,0,0)"--}}
-                        {{--}--}}
                     ],
                 },
                 options: {

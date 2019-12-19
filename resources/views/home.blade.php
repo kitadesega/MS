@@ -7,20 +7,20 @@
             <div></div>
         </div>
         <div class="osusume-block d-flex justify-content-between">
-            @foreach($rentalRecommendedBooks as $book)
-            <div class="osusume">
-                <div class="osusume-img">
-                    <img src="{{ asset('image/'.$book->image) }}">
-                </div>
-                <div class="osusume-kate">{{ $book->title }}</div>
-                <div class="osusume-title1"></div>
-                <div class="osusume-title2">
-                    <div class="hirano">
-                        <p>{{ $book->detail }}</p>
-                    </div>
-                </div>
-            </div>
-            @endforeach
+{{--            @foreach($rentalRecommendedBooks as $book)--}}
+{{--            <div class="osusume">--}}
+{{--                <div class="osusume-img">--}}
+{{--                    <img src="{{ asset('image/'.$book->image) }}">--}}
+{{--                </div>--}}
+{{--                <div class="osusume-kate">{{ $book->title }}</div>--}}
+{{--                <div class="osusume-title1"></div>--}}
+{{--                <div class="osusume-title2">--}}
+{{--                    <div class="hirano">--}}
+{{--                        <p>{{ $book->detail }}</p>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            @endforeach--}}
         </div>
     </div>
 
