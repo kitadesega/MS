@@ -78,6 +78,7 @@
                     @if( $key%4 === 0)
                     <div class="osusume-block d-flex justify-content-between">
                         @endif
+                        <a href="/book/show/{{ $book->id }}">
                         <div class="osusume">
                             <div class="osusume-img">
                                 <img src="{{ asset('image/'.$book->image) }}">
@@ -90,6 +91,7 @@
                                 </div>
                             </div>
                         </div>
+                        </a>
                         @if( $key%4 === 3 || $book === end($books))
                     </div>
                         @endif

@@ -12,14 +12,15 @@
                     <a  href="/book/show/{{ $book->id }}"></a>
                     <div class="se-block-w"></div>
                     <div class="se-block-g"></div>
-                    <div class="se-rental kanou">
-                        <div class="se-rental-text">               @if(!$book->rental_flag)
-                                貸出可能
-                            @else
-                                貸出中
-                            @endif
+                    @if(!$book->rental_flag)
+                        <div class="se-rental kanou">
+                            貸出可能
                         </div>
-                    </div>
+                    @else
+                        <div class="se-rental hukanou">
+                            <div class="se-rental-text">貸出中</div>
+                        </div>
+                    @endif
                     <div class="se-pic">
                         <img src="{{ asset('image/'.$book->image) }}">
                     </div>

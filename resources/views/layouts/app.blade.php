@@ -179,14 +179,14 @@
                     <div class="side-cc"></div>
                 </div>
             </a>
-            <a href="/rental/rentBookInput">
+            <a href="#modal-kashidashi">
                 <div class="side2 hov-anime-2">
                     <p>貸出</p>
                     <img src="{{ asset('svg/rentaru.svg') }}" >
                     <div class="side-dd"></div>
                 </div>
             </a>
-            <a href="/rental/returnBookInput">
+            <a href="#modal-henkyaku">
                 <div class="side2 hov-anime-3">
                     <p>返却</p>
                     <img src="{{ asset('svg/henkyaku.svg') }}" stroke-width="4">
