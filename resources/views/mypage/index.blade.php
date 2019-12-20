@@ -70,9 +70,10 @@
                     @endforeach
                 </div>
         </div>
-        <canvas id="status"></canvas>
+        <div style="float:left;width:40%;height:500px;background-color: red;margin-top:130px;">ああああ</div>
+        <div style="float:left;width:60%;background-color: white;border-radius: 6px;box-shadow: 0px 8px 8px 0 rgba(0,0,0,.2);padding:30px 0px;margin-top:130px;"><canvas id="status"></canvas></div>
 
-        <div class="top-kisetsu">
+        <div class="top-kisetsu" style="clear: both">
             <h1>データからのおすすめ</h1>
                 @foreach($books as $key => $book)
                     @if( $key%4 === 0)

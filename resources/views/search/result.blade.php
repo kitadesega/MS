@@ -14,7 +14,7 @@
                     <div class="se-block-g"></div>
                     @if(!$book->rental_flag)
                         <div class="se-rental kanou">
-                            貸出可能
+                            <div class="se-rental-text">貸出可能</div>
                         </div>
                     @else
                         <div class="se-rental hukanou">
@@ -66,30 +66,6 @@
 
     </div>
 
-
-
-
-    <div class="modal-wrapper" id="modal-kashidashi">
-        <a href="#!" class="modal-overlay"></a>
-        <div class="mo-pos">
-            <div class="modal-window">
-                <div class="modal-content">
-                    <h2>貸出フォーム</h2>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal-wrapper" id="modal-henkyaku">
-        <a href="#!" class="modal-overlay"></a>
-        <div class="mo-pos">
-            <div class="modal-window">
-                <div class="modal-content">
-                    <h2>返却フォーム</h2>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
     <div class="modal-wrapper" id="modal-search">

@@ -7,6 +7,13 @@ use Illuminate\Support\Facades\DB;
 
 class BooksModel extends Model
 {
+    public function indexBooks(){
+        $books = DB::table('books')
+            ->get();
+
+        return $books->random(4);
+    }
+
     //全ての本のデータ取得
     public function getBooks(){
         return DB::table('books')

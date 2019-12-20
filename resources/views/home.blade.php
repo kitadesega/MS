@@ -7,20 +7,22 @@
             <div></div>
         </div>
         <div class="osusume-block d-flex justify-content-between">
-{{--            @foreach($rentalRecommendedBooks as $book)--}}
-{{--            <div class="osusume">--}}
-{{--                <div class="osusume-img">--}}
-{{--                    <img src="{{ asset('image/'.$book->image) }}">--}}
-{{--                </div>--}}
-{{--                <div class="osusume-kate">{{ $book->title }}</div>--}}
-{{--                <div class="osusume-title1"></div>--}}
-{{--                <div class="osusume-title2">--}}
-{{--                    <div class="hirano">--}}
-{{--                        <p>{{ $book->detail }}</p>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            @endforeach--}}
+            @isset($rentalRecommendedBooks)
+            @foreach($rentalRecommendedBooks as $book)
+            <div class="osusume">
+                <div class="osusume-img">
+                    <img src="{{ asset('image/'.$book->image) }}">
+                </div>
+                <div class="osusume-kate">{{ $book->title }}</div>
+                <div class="osusume-title1"></div>
+                <div class="osusume-title2">
+                    <div class="hirano">
+                        <p>{{ $book->detail }}</p>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+                @endisset
         </div>
     </div>
 
@@ -30,80 +32,36 @@
             <div></div>
         </div>
         <div class="osusume-block d-flex justify-content-between">
+            @foreach($indexBooks as $book)
             <div class="osusume">
                 <div class="osusume-img">
-                    <img src="images/tst.png">
+                    <img src="{{ asset('image/'.$book->image) }}">
                 </div>
-                <div class="osusume-kate">ジャンル</div>
+                <div class="osusume-kate">{{ $book->largegenre }}</div>
                 <div class="osusume-title1"></div>
                 <div class="osusume-title2">
                     <div class="hirano">
-                        <p>ああああああああああああああああああああああああああああああああああああああ</p>
+                        <p>{{ $book->title }}</p>
                     </div>
                 </div>
             </div>
-            <div class="osusume">
-                <div class="osusume-img">
-                    <img src="images/tst.png">
-                </div>
-                <div class="osusume-kate">ジャンル</div>
-                <div class="osusume-title1"></div>
-                <div class="osusume-title2"></div>
-            </div>
-            <div class="osusume">
-                <div class="osusume-img">
-                    <img src="images/tst.png">
-                </div>
-                <div class="osusume-kate">ジャンル</div>
-                <div class="osusume-title1"></div>
-                <div class="osusume-title2"></div>
-            </div>
-            <div class="osusume">
-                <div class="osusume-img">
-                    <img src="images/tst.png">
-                </div>
-                <div class="osusume-kate">ジャンル</div>
-                <div class="osusume-title1"></div>
-                <div class="osusume-title2"></div>
-            </div>
+            @endforeach
         </div>
         <div class="osusume-block d-flex justify-content-between">
-            <div class="osusume">
-                <div class="osusume-img">
-                    <img src="images/tst.png">
-                </div>
-                <div class="osusume-kate">ジャンル</div>
-                <div class="osusume-title1"></div>
-                <div class="osusume-title2">
-                    <div class="hirano">
-                        <p>ああああああああああああああああああああああああああああああああああああああ</p>
+            @foreach($indexBooks as $book)
+                <div class="osusume">
+                    <div class="osusume-img">
+                        <img src="{{ asset('image/'.$book->image) }}">
+                    </div>
+                    <div class="osusume-kate">{{ $book->largegenre }}</div>
+                    <div class="osusume-title1"></div>
+                    <div class="osusume-title2">
+                        <div class="hirano">
+                            <p>{{ $book->title }}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="osusume">
-                <div class="osusume-img">
-                    <img src="images/tst.png">
-                </div>
-                <div class="osusume-kate">ジャンル</div>
-                <div class="osusume-title1"></div>
-                <div class="osusume-title2"></div>
-            </div>
-            <div class="osusume">
-                <div class="osusume-img">
-                    <img src="images/tst.png">
-                </div>
-                <div class="osusume-kate">ジャンル</div>
-                <div class="osusume-title1"></div>
-                <div class="osusume-title2"></div>
-            </div>
-            <div class="osusume">
-                <div class="osusume-img">
-                    <img src="images/tst.png">
-                </div>
-                <div class="osusume-kate">ジャンル</div>
-                <div class="osusume-title1"></div>
-                <div class="osusume-title2"></div>
-            </div>
+            @endforeach
         </div>
     </div>
 

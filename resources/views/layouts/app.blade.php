@@ -45,6 +45,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/common.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/hov.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/animate.css') }}">
+    <script type='text/javascript' src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
+    <script type='text/javascript' src="{{ asset("js/bootstrap.js") }}"></script>
 {{--    <link rel="stylesheet" type="text/css" href="{{ asset('css/tien.css') }}">--}}
 
 
@@ -117,6 +119,7 @@
     <div class="d-flex justify-content-end">
         <div class="daikei">
             <p>ホーム</p>
+
             <div class="daikei-bg">
             </div>
         </div>
@@ -153,6 +156,15 @@
                         @csrf
                     </form>
                 </div>
+                <div class="dropdown open">
+                    <ul class="dropdown-menu">
+                        <li class="active"><a href="#">メニュー1</a></li>
+                        <li><a href="#">メニュー2</a></li>
+                        <li><a href="#">メニュー3</a></li>
+                        <li role="separator" class="divider"></li><!-- 横仕切り線 -->
+                        <li><a href="#">その他リンク</a></li>
+                    </ul>
+                </div><!-- /.dropdown -->
             @endguest
         </div>
     </div>
@@ -193,38 +205,6 @@
                     <div class="side-ee"></div>
                 </div>
             </a>
-{{--            <div class="side">--}}
-{{--                <a href="/">--}}
-{{--                    <p class="langCng" lang="ja">ホーム</p>--}}
-{{--                    <p class="langCng" lang="en" style="display:none;">HOME</p>--}}
-{{--                </a>--}}
-{{--                <div class="side-bg"></div>--}}
-{{--            </div>--}}
-{{--            <div class="side">--}}
-{{--                <a href="/mypage">--}}
-{{--                    <p class="langCng" lang="ja">マイページ</p>--}}
-{{--                    <p class="langCng" lang="en" style="display:none;">MYPAGE</p>--}}
-{{--                </a>--}}
-{{--                <div class="side-bg"></div>--}}
-{{--            </div>--}}
-{{--            <div class="side2 side-first">--}}
-{{--                <a href="/search">--}}
-{{--                    <p class="langCng" lang="ja">検索</p>--}}
-{{--                    <p class="langCng" lang="en" style="display:none;">SEARCH</p>--}}
-{{--                </a>--}}
-{{--            </div>--}}
-{{--            <div class="side2">--}}
-{{--                <a href="/rental/rentBookInput">--}}
-{{--                    <p class="langCng" lang="ja">貸出</p>--}}
-{{--                    <p class="langCng" lang="en" style="display:none;">RENTAL</p>--}}
-{{--                </a>--}}
-{{--            </div>--}}
-{{--            <div class="side2">--}}
-{{--                <a href="/rental/returnBookInput">--}}
-{{--                    <p class="langCng" lang="ja">返却</p>--}}
-{{--                    <p class="langCng" lang="en" style="display:none;">RETURN</p>--}}
-{{--                </a>--}}
-{{--            </div>--}}
         </div>
     </aside>
     <article>
@@ -302,11 +282,84 @@
             <a href="#!" class="modal-close">×</a>
         </div>
     </div>
+    <div class="modal-wrapper" id="modal-kashidashi">
+        <a href="#!" class="modal-overlay"></a>
+        <div class="mo-pos">
+            <div class="modal-window">
+                <div class="taitoru">
+                    <p>貸出フォーム</p>
+                    <div class="taitoru-bg"></div>
+                </div>
+                <div class="modal-bg">
+                    <div class="modal-bg2"></div>
+                </div>
+                <div class="modal-content">
+                    <div class="container-fluid log-cm">
+                        <div class="row justify-content-cente">
+                            <div class="col-6">
+                                <div class="row justify-content-end miii-hen">
+                                    <div class="col-9">
+                                        <p class="hen-pos">バーコードのスキャンもしくは入力してください</p>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-end">
+                                    <div class="col-9">
+                                        <p class="kensaku-ma"></p>
+                                        <input type="text" id="text1" class="form-control" style="height:45px;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-1"></div>
+                            <div class="col-3">
+                                <button class="kensaku-bu btn-warning">実行</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-wrapper" id="modal-henkyaku">
+        <a href="#!" class="modal-overlay"></a>
+        <div class="mo-pos">
+            <div class="modal-window">
+                <div class="taitoru">
+                    <p>返却フォーム</p>
+                    <div class="taitoru-bg"></div>
+                </div>
+                <div class="modal-bg">
+                    <div class="modal-bg2"></div>
+                </div>
+                <div class="modal-content">
+                    <div class="container-fluid log-cm">
+                        <div class="row justify-content-cente">
+                            <div class="col-6">
+                                <div class="row justify-content-end miii-hen">
+                                    <div class="col-9">
+                                        <p class="hen-pos">バーコードのスキャンもしくは入力してください</p>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-end">
+                                    <div class="col-9">
+                                        <input type="text" id="text1" class="form-control" style="height:45px;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-1"></div>
+                            <div class="col-3">
+                                <button class="kensaku-bu btn-warning">実行</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="./js/bootstrap.min.js"></script>
+<script src="{{ asset("js/bootstrap.min.js") }}"></script>
 
 <script type="text/javascript">
     $('.bs-component [data-toggle="popover"]').popover();

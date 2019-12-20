@@ -42,6 +42,8 @@ class HomeController extends Controller
         $reviewModel = new ReviewModel();
         $books = $booksModel->getBooks();
 
+        $indexBooks = $booksModel->indexBooks();
+
 //        dd($booksModel->getAvgScoreAndBookId(17));
         //貸出状態が1(貸出中)であれば返却日を入れる
         foreach ($books as $book){
@@ -80,7 +82,8 @@ class HomeController extends Controller
         return view('home',[
             'books'=>$books,
 //            'reviewRecommendedBooks' => $reviewRecommendedBooks,
-            'rentalRecommendedBooks' => $rentalRecommendedBooks
+            'rentalRecommendedBooks' => $rentalRecommendedBooks,
+            'indexBooks' => $indexBooks,
         ]);
     }
 }
