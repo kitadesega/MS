@@ -1,10 +1,48 @@
 @charset "UTF-8";
+a{text-decoration: none;}
+a:link {color:#fcfcfc; text-decoration: none;} 
+a:visited {color:#fcfcfc;} 
+a:hover {color:#fcfcfc; text-decoration: none;} 
+a:active {color:#fcfcfc; } 
+
+#box {
+    width: 100px;
+    height: 100px;
+    background: #3399FF;
+}
+
 body{
     color: #444444;
-    background: #f7fcfe;
-    background: lightblue;
     padding-top: 80px;
+    position: relative;
+    background: radial-gradient(#2BB499,#15A186) fixed;
+    background: #F5BD28;
 }
+.image-book{
+    z-index: -99;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+.image-book img{
+    position: absolute;
+    bottom: 0;
+    right: 60px;
+    width: 800px;
+}
+
+#particles{
+    z-index: -100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
 img{
 	width: 100%;
 	vertical-align: bottom;
@@ -12,12 +50,38 @@ img{
 li{
     list-style: none;
 }
+.midashi-h{
+    position: relative;
+    width: auto;
+    height: 40px;
+}
+.midashi-h p{
+    position: absolute;
+    font-size: 28px;
+    font-weight: bold;
+    color: white;
+    z-index: 2;
+    margin: 4px 0 0 12px; 
+}
+.midashi-h div{
+  width: 320px;
+  border-top: 50px solid #F59116;
+  border-right: 23px solid transparent;
+  position: absolute;
+  z-index: 1;
+}
+
+.midashi-10{
+    width: 260px;
+}
+
+
 
 
 .syoshi-menu{
     width: 100%;
     height: 80px;
-    background: #444444;
+    background: #FAAC01;
     position: fixed;
     top: 0;
     left: 0;
@@ -32,18 +96,22 @@ li{
 .daikei-bg{
   height: 0;
   width: 350px;
-  border-top: 120px solid #dcdcdc;
+  border-top: 120px solid #444444;
   border-right: 50px solid transparent;
   position: absolute;
   z-index: 1;
 }
+
 .daikei p{
     position: absolute;
+    top: 26px;
+    left: 70px;
     margin: auto;
-    left: 0;
     z-index: 2;
     font-weight: normal;
     font-size: 40px;
+    font-weight: bold;
+    color: white;
 }
 
 .geNGO {
@@ -51,9 +119,14 @@ li{
     height: 80px;
     font-weight: bold;
     text-align: center;
-    background: #dcdcdc;
+    background: #fcfcfc;
 }
-
+.geNGO p{
+    padding-top: 20px;
+    font-weight: bold;
+    font-size: 20px;
+    color: #444444;
+}
 
 aside{
     width: 380px;
@@ -74,7 +147,7 @@ aside{
     position: relative;
     height: 100px;
     width: 100%;
-    background: #444; 
+    background: #444444;
 }
 
 .side p{
@@ -84,13 +157,14 @@ aside{
     z-index: 2;
     font-size: 1.5rem;
     font-weight: bold;
-    padding: 32px 20px;
+    padding: 32px 40px;
+    color: #444444;
 }
 
 .side-bg{
   height: 0;
   width: 220px;
-  border-top: 100px solid #dcdcdc;
+  border-top: 100px solid #fcfcfc;
   border-right: 50px solid transparent;
   position: absolute;
   z-index: 1;
@@ -99,30 +173,65 @@ aside{
 .side2{
     margin-top: 20px;
     position: relative;
-    height: 110px;
+    height: 100px;
     width: 300px;
-    background: #888888;
+    border-radius: 0 50px 50px 0;
+    overflow: hidden;
+    background: #fcfcfc;
+}
+.side-aa{
+    background: #FFA3FB;
+    width: 40px;
+    height: 100%;
+    z-index: 2;
+}
+.side-bb{
+    background: #FFA3FB;   
+    width: 40px;
+    height: 100%;
+    z-index: 2;
+}
+.side-cc{
+    background: #0089FF;
+    width: 40px;
+    height: 100%;
+    z-index: 2;
+}
+.side-dd{
+    background: #4CD603;   
+    width: 40px;
+    height: 100%;
+    z-index: 2;
+}
+.side-ee{
+    background: #ff0000;
+    width: 40px;
+    height: 100%;
+    z-index: 2;
 }
 
+
+
 .side2 p{
-  text-align: center;
-  width: 100%;
   display: block;
   position: absolute;
   top: 50%;
+    left: 100px;
   -webkit-transform : translateY(-50%);
   transform : translateY(-50%);
     z-index: 2;
     font-size: 1.5rem;
     font-weight: bold;
+    color: #444444;
+}
+.side2 img{
+    position: absolute;
+    bottom: -4px;
+    right: 10px;
+    width: 100px;
+    stroke-width: 20;
 }
 
-
-
-
-.side-first{
-    margin-top: 30px;
-}
 
 
 
@@ -146,7 +255,7 @@ aside{
 
 .osusume-block{
     margin-right: 120px;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .osusume{
@@ -158,7 +267,7 @@ aside{
 .osusume-img{
     width: 260px;
     margin: 0 auto;
-    background: white;
+    background: #fcfcfc;
     text-align: center;
     padding-top: 20px;
 }
@@ -227,6 +336,7 @@ aside{
     height: 320px;
     position: relative;
     margin-top: 30px;
+    margin-left: 60px;
 }
 .se-card top{
     position: relative;
@@ -244,7 +354,7 @@ aside{
     left: 20px;
     height: 0;
     width: 930px;
-    border-top: 260px solid #dcdcdc;
+    border-top: 260px solid #FAAC01;
     border-right: 120px solid transparent;
     z-index: 1;
 }
@@ -254,10 +364,37 @@ aside{
     z-index: 2;
     height: 0;
     width: 1000px;
-    border-top: 200px solid blue;
+    border-top: 200px solid #fcfcfc;
     border-right: 96px solid transparent;
-    opacity: 0.3;
 }
+.se-rental{
+    z-index: 3;
+    position: absolute;
+    top:30px;
+    right: 61px;
+    height: 50px;
+    width: 150px;
+  display: inline-block;
+  transform: skewX(-25deg);
+  padding: .7em 2.1em;
+  font-size: 16px;
+}
+.se-rental-text{
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+  display: inline-block;
+  transform: skewX(25deg);
+}
+
+.kanou{
+  background: #4DD604;
+}
+.hukanou{
+  background: #ff0000;
+}
+
+
 .se-pic{
     position: absolute;
     top: 0;
@@ -280,7 +417,7 @@ aside{
     color: #fff;
     font-weight: bold;
     padding: 6px 20px;
-    background: black;
+    background: #222222;
 }
 .se-text-block{
     position: absolute;
@@ -293,73 +430,261 @@ aside{
 }
 
 .se-ti{
-    
+    color: #444;
 }
 
 .se-read{
-    height: 44px;
+    margin-top: 10px;
+    height: 64px;
     overflow: hidden;
     width: 100%;
     text-align:justify;
     text-justify:inter-ideograph;
 }
 .se-read p{
-    padding: 0px 0;
     font-size: 18px;
     line-height: 23px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
 }
 
 .search-op{
     position: fixed;
     top: 160px;
     right: 0;
-    width: 350px;
-    height: 500px;
-    background: #888888;
-    padding: 5px 10px;
+    width: 280px;
+    height: 590px;
+    background: #fcfcfc;
 }
 
-.search-op h1{
-    text-align: center;
+.search-block{
+    position: relative;
+    width: 280px;
+    height: 80px;
+    margin-top: 30px;
 }
-.search-op p{
-    margin-bottom: 5px;
+
+.search-mi{
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    max-width: 70%;
+    height: 66px;
+    background: #FAAC01;
+  display: inline-block;
+  transform: skewX(-23deg);
 }
+
+.search-mi-bg{
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+  display: inline-block;
+  transform: skewX(23deg);
+}
+
+.search-block p{
+    text-align-last: center;
+    padding-top: 18px;
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+}
+.search-ward{
+    padding: 18px 16px 0 16px;
+    
+}
+.search-ward p{
+    padding-left: 4px;
+    margin-bottom: 4px;
+    color: #444;
+    font-weight: bold;
+}
+.search-ward .ward{
+    font-size: 18px;
+    margin-bottom: 36px;
+    background: #888;
+    border-radius: 8px;
+    padding: 8px 6px;
+    color: white;
+}
+
+
+
+
+
+
 
 .card-syousai{
     max-width: 1320px;
     margin-top: 30px;
-    background: white;
-    padding: 20px 0;
+    background: #fcfcfc;
+    padding: 30px 0;
+}
+
+.kensaku-bu{
+    width: 100%;
+    height: 90px;
+    color: white;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 102px;
+    border-radius: 100px;
+    
+}
+.kensaku-bu:hover{
+    color: white;
+}
+.kensaku-ma{
+    margin-left: 4px;
+    margin-bottom: 6px;
+    color: #fcfcfc;
+    font-weight: bold;
+}
+
+.btn-group-toggle{
+    width: 100%;
+}
+.btn-group-toggle label{
+    width: 200px;
+}
+.btn-group-toggle label{
+    padding-top: 10px;
+    padding-bottom: 0;
+}
+
+
+
+.radio-button input[type="radio"]:checked + label {
+  background-color: #5a6268;
+  border-color: #545b62;
+  color: #fff;
+}
+.miii{
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+.miii input{
+    background: #fcfcfc;
+}
+.miii select{
+    background: #fcfcfc
+}
+.miii-2{
+    margin-top: 100px;
+}
+.miii-hen{
+    margin-top: 94px;
+    margin-bottom: 0px;
+}
+.taitoru{
+    z-index: 1;
+    position: absolute;
+    top: -50px;
+    left: 0;
+    height: 100px;
+    margin: auto;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 32px 40px;
+    width: 420px;
+}
+.taitoru p{
+    position: absolute;
+    color: #fcfcfc;
+    z-index: 2;
+}
+.taitoru-bg{
+  width: 360px;
+  border-bottom: 100px solid #222222;
+  border-right: 50px solid transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+
+.rentaru-bu button{
+    border-radius: 100px;
+    width: 80%;
+    height: 70px;
+    margin: 0 auto;
+}
+
+.hen-pos{
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+    margin-left: 2px;
+}
+.kansou-txt{
+    font-size: 22px;
+    font-weight: bold;
+}
+.kansou-area{
+    width: 90%;
+    height: 300px;
+}
+.henkyaku-bu{
+    width: 90%;
+    padding: 30px 40px 0 40px;
+    color: white;
+}
+.henkyaku-bu button{
+    border-radius: 100px;
+    height: 70px;
+}
+.rebi{
+    
+}
+.rabi-pic img{
+    width: 80px;
+}
+.rebi-txt{
+margin: 10px 0;
+border-radius: 8px;
+}
+.rebi-txt p{
+    font-size: 22px;
+    background: #CCE1F2;
+    padding: 10px 6px;
+    border-radius: 8px;
+    margin-bottom: 0;
+}
+.book-finish img{
+    max-width: 180px;
+}
+
+.book-finish-title{
+    width: 100%;
+    height: 120px;
+    overflow: hidden;
+    padding-top: 90px;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+.book-finish-ms{
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
 }
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+-line-clamp: 2;
+}
 
 
 
@@ -404,7 +729,7 @@ aside{
   z-index: 20;
   position: relative;
   padding: 30px 30px 15px;
-  background: #fff;
+  background: #444;
 }
 
 .mo-pos{
@@ -433,10 +758,64 @@ aside{
 }
 
 .modal-content{
-    min-height: 200px;
-    max-height: 200px;
+    min-height: 280px;
+    max-height: 280px;
+    padding: 0 200px;
     border: none;
 }
 /*-- モーダルウィンドウCSS ここまで --*/
 
 
+.hov-anime:hover,
+.hov-anime:focus {
+    animation: unkmorimori 1s;
+    box-shadow: 0 0 0 2em rgba(255, 255, 255, 0);
+}
+
+@keyframes unkmorimori {
+    0% {
+        box-shadow: 0 0 0 0 var(--hover);
+    }
+}
+
+
+.hov-anime{
+    --color: #fcfcfc;
+    --hover: #F59116;
+}
+.hov-anime{
+    color: var(--color);
+    transition: 0.25s;
+}
+.hov-anime:hover,
+.hov-anime:focus {
+    border-color: var(--hover);
+    color: #fcfcfc;
+}
+
+
+
+.modal-bg{
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    width: 86vw;
+    height: 325px;
+    background: #888888;
+  display: inline-block;
+  transform: skewX(-23deg);
+  font-size: 16px;
+}
+.modal-bg-2{
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+  display: inline-block;
+  transform: skewX(23deg);
+}
+.modal-content{
+    background: none;
+}
