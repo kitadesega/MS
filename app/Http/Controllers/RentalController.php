@@ -55,8 +55,8 @@ class RentalController extends Controller
         $rentalModel = new RentalModel();
         $booksModel = new BooksModel();
 
-        $rentalModel->rental(Auth::user()->id,$request->bookId,$request->returnDate);
-        $booksModel->bookStateUpdate($request->bookId,1);
+        $rentalModel->rental(Auth::user()->id,$request->rentalBookId,$request->rentalReturnDate);
+        $booksModel->bookStateUpdate($request->rentalBookId,1);
 
         return redirect('/');
     }
@@ -79,13 +79,18 @@ class RentalController extends Controller
         $rentalModel = new RentalModel();
         $booksModel = new BooksModel();
 
-        $rentalModel->bookReturn(Auth::user()->id,$request->bookId);
+        $rentalModel->bookReturn(Auth::user()->id,$request->returnBookId);
+//        dd($request->returnBookId);
         //返却するのでrentalFlagを0に
-        $booksModel->bookStateUpdate($request->bookId,0);
+        $booksModel->bookStateUpdate($request->returnBookId,0);
         //貸出履歴からお勧めを表示
         $rentalRecommendedBooks = $booksModel->rentalRecommendedBooks(Auth::user()->id);
-
-        return view('rental.return_complete',['bookId' => $request->bookId,'rentalRecommendedBooks' => $rentalRecommendedBooks]);
+        $book = $booksModel->getBooksFirst($request->returnBookId);
+        return view('rental.return_complete',[
+            'bookId' => $request->returnBookId,
+            'rentalRecommendedBooks' => $rentalRecommendedBooks,
+            'book' => $book
+        ]);
     }
 
     //レビュー機能
@@ -95,9 +100,11 @@ class RentalController extends Controller
     $apiModel = new NaturalLanguageModel();
     $insertId = $reviewModel->reviewInsert(Auth::user()->id,$request->bookId,$request->Impressions);
 
-    $apiModel->sentimentAnalysis($request->bookId,$insertId,$request->Impressions);
+    $score = $apiModel->sentimentAnalysis($request->bookId,$insertId,$request->Impressions);
 
-       return redirect('/reviewComplete');
+       return view('review.review_complete',[
+           'score' => $score
+       ]);
     }
 
 }

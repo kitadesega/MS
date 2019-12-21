@@ -30,8 +30,9 @@ class NaturalLanguageModel extends Model
                 'review_id' => $reviewId,
                 'score' => $sentiment['score'],
                 'magnitude' => $sentiment['magnitude'],
-
             ]);
+
+        return $sentiment['score'];
     }
 
     //感情分析スコアをソートして本の情報と結合して取得

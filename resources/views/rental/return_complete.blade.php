@@ -56,7 +56,7 @@
     <div class="row m-3">
         <div class="col-5" id="column1">
             <p style="max-width:300px; margin:0 auto;" >
-                <img src="images/tst.png">
+                <img src="{{ asset('image/'.$book->image) }}">
             </p>
         </div>
 
@@ -70,6 +70,7 @@
             <p class="henkyaku-bu">
                 <button type="submit" class="btn btn-primary btn-lg btn-block">送信</button>
             </p>
+            <input type="hidden" name="bookId" value="{{ $book->id }}">
         </form>
         </div>
     </div>

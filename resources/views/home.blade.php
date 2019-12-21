@@ -32,7 +32,7 @@
             <div></div>
         </div>
         <div class="osusume-block d-flex justify-content-between">
-            @foreach($indexBooks as $book)
+            @foreach($indexBooks1 as $book)
             <div class="osusume">
                 <div class="osusume-img">
                     <img src="{{ asset('image/'.$book->image) }}">
@@ -48,7 +48,7 @@
             @endforeach
         </div>
         <div class="osusume-block d-flex justify-content-between">
-            @foreach($indexBooks as $book)
+            @foreach($indexBooks2 as $book)
                 <div class="osusume">
                     <div class="osusume-img">
                         <img src="{{ asset('image/'.$book->image) }}">

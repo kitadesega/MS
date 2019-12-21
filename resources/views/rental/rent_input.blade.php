@@ -61,6 +61,7 @@
         /* Ajax通信開始 */
 
         $('#bookBarcode').on('change', function () {
+            console.log('動作確認');
             var request = $.ajax({
                 type: 'POST',
                 data: {

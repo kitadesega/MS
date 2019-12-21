@@ -23,19 +23,35 @@ class MypageController extends Controller
         $history = $reviewModel->getReviewAndScore(Auth::user()->id);
         $books = $bookModel->reviewRecommendedBooks(Auth::user()->id);
 
-        $Scores = $apiModel->getScoreAddition(2);
+        //ポジティブスコアとネガティブスコアの奴
+        $Scores = $apiModel->getScoreAddition(Auth::user()->id);
 
         $positives = $Scores[0];
         $positiveTotal = $Scores[1];
         $negatives = $Scores[2];
         $negativeTotal = $Scores[3];
 
-//        dd($avgScores);
+        $yetCategorys = $bookModel->getCategorys();
+        $myCategorys = $bookModel->getMyReadCategorys();
+        //キーと値を入れ替える
+        $yetCategorys = $yetCategorys->flip();
+        $myCategorys = $myCategorys->flip();
+        //自分が読んだ事のある本のカテゴリーを削除し、読んだ事の無いカテゴリーのみが残る
+        foreach ( $myCategorys as $key => $value ){
+            $yetCategorys->pull($key);
+        }
+
+        //キーと値を入れ替える
+        $yetCategorys = $yetCategorys->flip();
+
+
+//        dd($yetCategorys->random());
+        $yetRandomCategory = $yetCategorys->random();
         return view('mypage.index',[
             'history' => $history,
             'books' => $books,
-            'positives'=>$positives,
-            'negatives'=>$negatives,
+            'positives' => $positives,
+            'negatives' => $negatives,
             'positiveTotal' => $positiveTotal,
             'negativeTotal' => $negativeTotal
         ]);

@@ -10,7 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+{{--    <script src="{{ asset('js/app.js') }}" defer></script>--}}
     <script>
         // window.addEventListener('DOMContentLoaded', function () {
         //         var wDef = (navigator.browserLanguage || navigator.language || navigator.userLanguage).substr(0,2);
@@ -46,6 +46,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/hov.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/animate.css') }}">
     <script type='text/javascript' src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
+    <script type='text/javascript' src="{{ asset('js/jquery.particleground.min.js') }}"></script>
     <script type='text/javascript' src="{{ asset("js/bootstrap.js") }}"></script>
 {{--    <link rel="stylesheet" type="text/css" href="{{ asset('css/tien.css') }}">--}}
 
@@ -294,9 +295,10 @@
                     <div class="modal-bg2"></div>
                 </div>
                 <div class="modal-content">
+                    <form action="/rental/rent" method="post">
                     <div class="container-fluid log-cm">
                         <div class="row justify-content-cente">
-                            <div class="col-6">
+                            <div class="col-6" id="rentalBook">
                                 <div class="row justify-content-end miii-hen">
                                     <div class="col-9">
                                         <p class="hen-pos">バーコードのスキャンもしくは入力してください</p>
@@ -305,16 +307,22 @@
                                 <div class="row justify-content-end">
                                     <div class="col-9">
                                         <p class="kensaku-ma"></p>
-                                        <input type="text" id="text1" class="form-control" style="height:45px;">
+                                        <input type="text" id="rentalBookBarcode" class="form-control" style="height:45px;">
                                     </div>
                                 </div>
                             </div>
+                                @csrf
+                                <input type="date" name="returnDate" min="{{ date("Y-m-d") }}"></input>
+                                <input type="hidden" name="rentalBookId" id="rentalBookId"value="">
+
                             <div class="col-1"></div>
                             <div class="col-3">
-                                <button class="kensaku-bu btn-warning">実行</button>
+                                <button type="submit"class="kensaku-bu btn-warning">実行</button>
                             </div>
+
                         </div>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -331,6 +339,8 @@
                     <div class="modal-bg2"></div>
                 </div>
                 <div class="modal-content">
+                    <form action="/rental/returnBook" method="post">
+                        @csrf
                     <div class="container-fluid log-cm">
                         <div class="row justify-content-cente">
                             <div class="col-6">
@@ -341,23 +351,24 @@
                                 </div>
                                 <div class="row justify-content-end">
                                     <div class="col-9">
-                                        <input type="text" id="text1" class="form-control" style="height:45px;">
+                                        <input type="text" id="returnBookBarcode" class="form-control" style="height:45px;">
                                     </div>
                                 </div>
                             </div>
+                            <input type="hidden" name="returnBookId" id="returnBookId"value="">
                             <div class="col-1"></div>
                             <div class="col-3">
                                 <button class="kensaku-bu btn-warning">実行</button>
                             </div>
                         </div>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script type='text/javascript' src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="{{ asset("js/bootstrap.min.js") }}"></script>
 
@@ -365,5 +376,154 @@
     $('.bs-component [data-toggle="popover"]').popover();
     $('.bs-component [data-toggle="tooltip"]').tooltip();
 </script>
+    <script>
+        $(function() {
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            /* Ajax通信開始 */
+
+            $('#rentalBookBarcode').on('input', function () {
+                console.log('動作確認');
+                var request = $.ajax({
+                    type: 'POST',
+                    data: {
+                        bookBarcode: $('#rentalBookBarcode').val()
+                    },
+                    url: '/ajaxBookSearch',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    cache: false,
+                    dataType: 'json',
+                    timeout: 3000
+                });
+
+                /* 成功時 */
+                request.done(function (data) {
+                    console.log(data);
+                    $('#rentalBook').empty();
+                    $('#rentalBookBarcode').val('');
+                    $('#rentalBookId').val(data.id);
+                    if (Object.keys(data).length) {
+                        if(data.rental_flag == 1){
+                            $('#rentalBook').append(
+                                '<div class="col-sm-6 col-md-4">' +
+                                '<a href="#" class="card">' +
+                                '<img class="card-img" src="{{ asset('') }}image/' + data.image + '" alt="...">' +
+                                '</a>' +
+                                '<div class="card-body">' +
+                                '<h5 class="card-title">' + data.title + '</h5>' +
+                                '<h2>貸出中です</h2>' +
+                                '<a href="#" class="btn btn-danger">返却日:'+ data.returnDay +'</a>' +
+                                '</div>' +
+                                '</div>'
+                            );
+                        }else {
+                            $('#rentalBook').append(
+                                '<div class="col-sm-6 col-md-4">' +
+                                '<a href="#" class="card">' +
+                                '<img class="card-img" src="{{ asset('') }}image/' + data.image + '" alt="...">' +
+                                '</a>' +
+                                '<div class="card-body">' +
+                                '<h5 class="card-title">' + data.title + '</h5>' +
+                                '<p class="card-text"style="height: 200px;overflow: hidden; ">' + data.detail + '</p>' +
+                                '<form action="/rental/rentConfirm" method="post">@csrf' +
+                                '<input type="hidden" name="bookId" value="' + data.id + '">' +
+                                '<button type="submit" class="btn btn-primary">レンタル</button>' +
+                                '</form>' +
+                                '</div>' +
+                                '</div>'
+                            );
+                        }
+                    }else{
+                        $('#rentalBook').append('<h1>存在しません</h1>');
+                    }
+
+                });
+
+                /* 失敗時 */
+                request.fail(function () {
+                    alert("通信に失敗しました");
+                });
+
+            });
+        });
+
+        $(function() {
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            /* Ajax通信開始 */
+
+            $('#returnBookBarcode').on('input', function () {
+// console.log(toHalfWidth($('#bookBarcode').val()));
+                var request = $.ajax({
+                    type: 'POST',
+                    data: {
+                        bookBarcode: $('#returnBookBarcode').val()
+                    },
+                    url: '/ajaxBookSearch',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    cache: false,
+                    dataType: 'json',
+                    timeout: 3000
+                });
+
+                /* 成功時 */
+                request.done(function (data) {
+                    console.log(data);
+                    $('#returnBook').empty();
+                    $('#returnBookBarcode').val('');
+                    $('#returnBookId').val(data.id);
+                    if (Object.keys(data).length) {
+                        $('#returnBook').append(
+                            '<div class="col-sm-6 col-md-4">' +
+                            '<a href="#" class="card">' +
+                            '<img class="card-img" src="{{ asset('') }}image/' + data.image + '" alt="...">' +
+                            '</a>' +
+                            '<div class="card-body">' +
+                            '<h5 class="card-title">' + data.title + '</h5>' +
+                            '<p class="card-text"style="height: 200px;overflow: hidden; ">' + data.detail + '</p>' +
+                            '<form action="/rental/returnBook" method="post">@csrf' +
+                            '<input type="hidden" name="bookId" value="' + data.id + '">' +
+                            '<button type="submit" class="btn btn-primary">返却</button>'+
+                            '</form>' +
+                            '</div>' +
+                            '</div>'
+                        );
+                    }else{
+                        $('#returnBook').append('<h1>存在しません</h1>');
+                    }
+
+                });
+
+                /* 失敗時 */
+                // request.fail(function () {
+                //     alert("通信に失敗しました");
+                // });
+
+            });
+        });
+
+        function toHalfWidth(strVal){
+            // 半角変換
+            var halfVal = strVal.replace(/[！-～]/g,
+                function( tmpStr ) {
+                    // 文字コードをシフト
+                    return String.fromCharCode( tmpStr.charCodeAt(0) - 0xFEE0 );
+                }
+            );
+
+            // 文字コードシフトで対応できない文字の変換
+            return halfVal.replace(/”/g, "\"")
+                .replace(/’/g, "'")
+                .replace(/‘/g, "`")
+                .replace(/￥/g, "\\")
+                .replace(/　/g, " ")
+                .replace(/〜/g, "~");
+        }
+        function myFnc(){
+            $('input:visible').eq(0).focus();
+        }
+    </script>
 </body>
 </html>

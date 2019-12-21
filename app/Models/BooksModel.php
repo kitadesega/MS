@@ -212,4 +212,23 @@ class BooksModel extends Model
             ->groupBy('naturallanguage.book_id')
             ->first();
     }
+
+    //存在しているカテゴリーを取得
+    public function getCategorys(){
+        return DB::table('books')
+            ->groupBy('largegenre')
+            ->pluck('largegenre');
+    }
+
+    public function getMyReadCategorys(){
+        return DB::table('books')
+            ->join('rental','books.id','=','rental.book_id')
+            ->groupBy('largegenre')
+            ->pluck('largegenre');
+    }
+
+//    //読んだこのないカテゴリーを取得
+//    public function getYetCategory(){
+//        return DB::table('')
+//    }
 }

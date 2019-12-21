@@ -10,6 +10,7 @@
 
                     <div class="card-body">
                         <h1>投稿が完了しました。</h1>
+                        <h1>点数:{{ $score }}</h1>
                     </div>
                 </div>
             </div>
