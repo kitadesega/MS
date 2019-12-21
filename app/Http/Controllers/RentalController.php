@@ -58,7 +58,9 @@ class RentalController extends Controller
         $rentalModel->rental(Auth::user()->id,$request->rentalBookId,$request->rentalReturnDate);
         $booksModel->bookStateUpdate($request->rentalBookId,1);
 
-        return redirect('/');
+        return view('rental.rent_complete',[
+            'rentalReturnDate' => $request->rentalReturnDate,
+        ]);
     }
 
     public function rentConfirm(Request $request){

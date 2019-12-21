@@ -55,8 +55,11 @@
 
 
         <div class="top-rireki">
-            <h1>データ</h1>
-                <canvas id="myLineChart"></canvas>
+            <div class="midashi-h">
+                <p>直近のスコアグラフ</p>
+                <div></div>
+            </div>
+                <div style="background-color:white;"><canvas id="myLineChart"></canvas></div>
                 <div style="margin-left:80px;margin-top:-20px">
 
                     @foreach($history as $key=>$book)
@@ -74,7 +77,10 @@
         <div style="float:left;width:60%;background-color: white;border-radius: 6px;box-shadow: 0px 8px 8px 0 rgba(0,0,0,.2);padding:30px 0px;margin-top:130px;"><canvas id="status"></canvas></div>
 
         <div class="top-kisetsu" style="clear: both">
-            <h1>データからのおすすめ</h1>
+            <div class="midashi-h">
+                <p>AI分析からのおすすめ</p>
+                <div></div>
+            </div>
                 @foreach($books as $key => $book)
                     @if( $key%4 === 0)
                     <div class="osusume-block d-flex justify-content-between">

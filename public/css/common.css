@@ -663,9 +663,9 @@ border-radius: 8px;
 
 .book-finish-title{
     width: 100%;
-    height: 120px;
+    height: 46px;
     overflow: hidden;
-    padding-top: 90px;
+    padding-top: 20px;
     color: white;
     font-size: 22px;
     font-weight: bold;
@@ -678,7 +678,27 @@ border-radius: 8px;
     font-size: 22px;
     font-weight: bold;
 }
-
+.kashidashi-bu{
+    margin-top: 30px;
+    padding: 20px 40px;
+    border-radius: 100px;
+    width: 100%;
+    color: white;
+    font-weight: bold;
+}
+.hen-pos-2{
+    font-weight: bold;
+    font-size: 18px;
+    color: white;
+    margin-left: 2px;
+    margin-bottom: 0;
+}
+.score-txt{
+    padding-top: 10px;
+    margin-bottom: 0px;
+    font-size: 18px;
+    font-weight: bold;
+}
 
 
 

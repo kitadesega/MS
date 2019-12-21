@@ -171,7 +171,7 @@
                 <div class="se-block-g"></div>
                     @if(!$book->rental_flag)
                     <div class="se-rental kanou">
-                        貸出可能
+                        <div class="se-rental-text"> 貸出可能</div>
                     </div>
                     @else
                     <div class="se-rental hukanou">
@@ -181,7 +181,7 @@
                 <div class="se-pic">
                     <img src="{{ asset('image/'.$book->image) }}">
                 </div>
-                <div class="se-kate">ジャンル</div>
+                <div class="se-kate">{{ $book->largegenre }}</div>
                 <div class="se-text-block">
                     <div class="se-ti">
                         <h3>{{ $book->title }}</h3>
@@ -200,42 +200,21 @@
         <div class="top-rireki">
             <h1>おすすめ</h1>
             <div class="osusume-block d-flex justify-content-between">
+                @foreach($indexBooks as $book)
                 <div class="osusume">
                     <div class="osusume-img">
-                        <img src="images/tst.png">
+                        <img src="{{ asset('image/'.$book->image) }}">
                     </div>
-                    <div class="osusume-kate">ジャンル</div>
+                    <div class="osusume-kate">{{ $book->largegenre }}</div>
                     <div class="osusume-title1"></div>
                     <div class="osusume-title2">
                         <div class="hirano">
-                            <p>ああああああああああああああああああああああああああああああああああああああ</p>
+                            <p>{{ $book->title }}</p>
                         </div>
                     </div>
                 </div>
-                <div class="osusume">
-                    <div class="osusume-img">
-                        <img src="images/tst.png">
-                    </div>
-                    <div class="osusume-kate">ジャンル</div>
-                    <div class="osusume-title1"></div>
-                    <div class="osusume-title2"></div>
-                </div>
-                <div class="osusume">
-                    <div class="osusume-img">
-                        <img src="images/tst.png">
-                    </div>
-                    <div class="osusume-kate">ジャンル</div>
-                    <div class="osusume-title1"></div>
-                    <div class="osusume-title2"></div>
-                </div>
-                <div class="osusume">
-                    <div class="osusume-img">
-                        <img src="images/tst.png">
-                    </div>
-                    <div class="osusume-kate">ジャンル</div>
-                    <div class="osusume-title1"></div>
-                    <div class="osusume-title2"></div>
-                </div>
+                @endforeach
+
             </div>
         </div>
 

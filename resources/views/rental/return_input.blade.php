@@ -105,7 +105,7 @@
                         '<h5 class="card-title">' + data.title + '</h5>' +
                         '<p class="card-text"style="height: 200px;overflow: hidden; ">' + data.detail + '</p>' +
                         '<form action="/rental/returnBook" method="post">@csrf' +
-                        '<input type="hidden" name="bookId" value="' + data.id + '">' +
+                        '<input type="hidden" name="returnBookId" value="' + data.id + '">' +
                         '<button type="submit" class="btn btn-primary">返却</button>'+
                         '</form>' +
                         '</div>' +

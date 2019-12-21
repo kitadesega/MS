@@ -17,6 +17,8 @@ class BookController extends Controller
         $rentalModel = new RentalModel();
         $book = $bookModel->getBooksFirst($bookId);
 
+        $indexBooks = $bookModel->indexBooks();
+
         //英語に翻訳
         $book->enDetail = $this->translation($book->detail);
         $book->enTitle = $this->translation($book->title);
@@ -39,7 +41,8 @@ class BookController extends Controller
         return view('book.show',[
             'book' => $book,
             'LowScoreReview' => $LowScoreReview,
-            'HighScoreReview' => $HighScoreReview
+            'HighScoreReview' => $HighScoreReview,
+            'indexBooks' => $indexBooks
         ]);
     }
 
