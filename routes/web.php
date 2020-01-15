@@ -54,7 +54,8 @@ Route::get('/reviewComplete', function () {
 Route::get('/book/show/{bookid}','BookController@show');
 
 
-
+Route::get('/presentation','PresenController@index');
+Route::post('/presentation/score','PresenController@score');
 
 
 //

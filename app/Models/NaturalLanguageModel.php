@@ -99,4 +99,25 @@ class NaturalLanguageModel extends Model
     }
 
 
+    public function ApiTest($reviewText){
+        $config = config_path().'/json/My First Project-afd2f228a06e.json';
+
+        putenv("GOOGLE_APPLICATION_CREDENTIALS=$config");
+        $projectId = 'third-index-260107';
+
+        $language = new LanguageClient([
+            'projectId' => $projectId
+        ]);
+
+        $text = $reviewText;
+        $annotation = $language->analyzeSentiment($text);
+
+        $sentiment = $annotation->sentiment();
+
+        $result[] = $sentiment['score'];
+        $result[] = $sentiment['magnitude'];
+
+        return $result;
+    }
+
 }
